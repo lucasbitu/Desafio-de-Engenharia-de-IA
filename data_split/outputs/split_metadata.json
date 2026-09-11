@@ -1,0 +1,88 @@
+{
+  "dataset_path": "D:\\Dhauz\\archive\\all_tickets_processed_improved_v3.csv",
+  "dataset_sha256": "044FDACE33FA564E1E60453F2941DAFC95539C99878B0D32746950394B9DD4D4",
+  "dataset_rows": 47837,
+  "text_column": "Document",
+  "label_column": "Topic_group",
+  "random_seed": 42,
+  "strategy": "proportional_stratified_split_with_explicit_integer_quotas",
+  "quota_method": "largest_remainder",
+  "test_size": 200,
+  "validation_ratio_of_development": 0.2,
+  "train_rows": 38109,
+  "validation_rows": 9528,
+  "test_rows": 200,
+  "class_counts_by_split": {
+    "Access": {
+      "train": 5676,
+      "validation": 1419,
+      "test": 30,
+      "total": 7125
+    },
+    "Administrative rights": {
+      "train": 1402,
+      "validation": 351,
+      "test": 7,
+      "total": 1760
+    },
+    "HR Support": {
+      "train": 8695,
+      "validation": 2174,
+      "test": 46,
+      "total": 10915
+    },
+    "Hardware": {
+      "train": 10848,
+      "validation": 2712,
+      "test": 57,
+      "total": 13617
+    },
+    "Internal Project": {
+      "train": 1688,
+      "validation": 422,
+      "test": 9,
+      "total": 2119
+    },
+    "Miscellaneous": {
+      "train": 5625,
+      "validation": 1406,
+      "test": 29,
+      "total": 7060
+    },
+    "Purchase": {
+      "train": 1963,
+      "validation": 491,
+      "test": 10,
+      "total": 2464
+    },
+    "Storage": {
+      "train": 2212,
+      "validation": 553,
+      "test": 12,
+      "total": 2777
+    }
+  },
+  "record_id_method": "sha256(canonical_json(dataset_sha256, source_row, document, topic_group))",
+  "near_duplicate_audit": "not_performed",
+  "near_duplicate_risk": "accepted_and_documented",
+  "checks": {
+    "test_has_exact_requested_size": true,
+    "all_rows_are_assigned": true,
+    "all_source_ids_are_preserved": true,
+    "train_validation_do_not_overlap": true,
+    "train_test_do_not_overlap": true,
+    "validation_test_do_not_overlap": true,
+    "all_classes_exist_in_train": true,
+    "all_classes_exist_in_validation": true,
+    "all_classes_exist_in_test": true,
+    "record_ids_remain_unique": true,
+    "same_seed_reproduces_same_assignment": true
+  },
+  "generated_at_utc": "2026-09-11T03:29:47.236730+00:00",
+  "output_sha256": {
+    "train.csv": "62DA11CE58FA9EAF6C3AC04A77BE24FC0C66A97864829D68CA98FDBE6FDDF894",
+    "validation.csv": "4EEA86B63A3E3D7186C6F52C3FFF41D6D8E266679D7B9496428E3E2971366DB0",
+    "test.csv": "E857B8873DE34B47EC39360F82BD25A04497A811D9D985E835F9D1EEF27F5B6D",
+    "split_manifest.csv": "87C2F449476ADB89EC47230881E8246E1F8FC4AA796EC1C9D4182105E1E49C23"
+  }
+}
