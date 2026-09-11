@@ -1,0 +1,274 @@
+[
+  {
+    "record_id": "33cb7ffd6a2076a7e257cac5d5d9806a6f5608a934413cd120f255cdc47c4404",
+    "actual_class": "Access",
+    "text": "access for secondary secondary hi please provide secondary ledger users please provide existing roles assigned these users prod test please create thank kind regards analyst",
+    "class": "Access",
+    "justification": "The ticket was classified as Access because 'users', 'create', 'users please' and 'please create' provided the strongest positive evidence for this class.",
+    "confidence": 0.7715001255616027,
+    "evidence": [
+      {
+        "feature": "users",
+        "tfidf": 0.18531259077151696,
+        "coefficient": 6.461719755343047,
+        "contribution": 1.197438028702113
+      },
+      {
+        "feature": "create",
+        "tfidf": 0.09142968947809964,
+        "coefficient": 6.440177855357056,
+        "contribution": 0.5888234614990293
+      },
+      {
+        "feature": "users please",
+        "tfidf": 0.18282760121511726,
+        "coefficient": 0.9860915237197818,
+        "contribution": 0.18028474786024762
+      },
+      {
+        "feature": "please create",
+        "tfidf": 0.10876868944287096,
+        "coefficient": 1.431134094241706,
+        "contribution": 0.15566257984768053
+      }
+    ]
+  },
+  {
+    "record_id": "89da4c768426787547c49de3d155e4027bceff8762964ec231b8b9062684e283",
+    "actual_class": "Administrative rights",
+    "text": "new version of the for for version hi discussed installed slave download confirmation id thank senior engineer",
+    "class": "Hardware",
+    "justification": "The ticket was classified as Hardware because 'download', 'installed', 'engineer' and 'discussed' provided the strongest positive evidence for this class.",
+    "confidence": 0.23440949159527052,
+    "evidence": [
+      {
+        "feature": "download",
+        "tfidf": 0.17296820616936973,
+        "coefficient": 0.742077893491705,
+        "contribution": 0.12835588207520482
+      },
+      {
+        "feature": "installed",
+        "tfidf": 0.1509695799050776,
+        "coefficient": 0.787897074789582,
+        "contribution": 0.11894849038942269
+      },
+      {
+        "feature": "engineer",
+        "tfidf": 0.09091930177463937,
+        "coefficient": 0.8477228910625036,
+        "contribution": 0.0770743733537815
+      },
+      {
+        "feature": "discussed",
+        "tfidf": 0.1733890767793627,
+        "coefficient": 0.29165096316532774,
+        "contribution": 0.05056909124504809
+      }
+    ]
+  },
+  {
+    "record_id": "8860e5fcf55bd85ef119941fb7f01fbee58a6d96fcfc27af10c1407589f95362",
+    "actual_class": "HR Support",
+    "text": "new starter hello please fill date",
+    "class": "HR Support",
+    "justification": "The ticket was classified as HR Support because 'starter', 'new starter', 'fill' and 'date' provided the strongest positive evidence for this class.",
+    "confidence": 0.9990801733547431,
+    "evidence": [
+      {
+        "feature": "starter",
+        "tfidf": 0.27388441708653993,
+        "coefficient": 8.22116570993726,
+        "contribution": 2.251649178238017
+      },
+      {
+        "feature": "new starter",
+        "tfidf": 0.28543602407173857,
+        "coefficient": 5.060008551321513,
+        "contribution": 1.4443087226582103
+      },
+      {
+        "feature": "fill",
+        "tfidf": 0.31778314598347823,
+        "coefficient": 2.286510250346793,
+        "contribution": 0.7266144206786742
+      },
+      {
+        "feature": "date",
+        "tfidf": 0.23709926542780652,
+        "coefficient": 2.917763723969738,
+        "contribution": 0.691799635645126
+      }
+    ]
+  },
+  {
+    "record_id": "efad26b9f3f00cfaab9311412f53669400f83c7d973bf38a59d846aa4478f591",
+    "actual_class": "Hardware",
+    "text": "laptop connected on request rebuild connected rebuild hi please provide order debug sip trunk gateway wireless wired connected regards",
+    "class": "Hardware",
+    "justification": "The ticket was classified as Hardware because 'laptop', 'connected', 'rebuild' and 'wireless' provided the strongest positive evidence for this class.",
+    "confidence": 0.8903914845864924,
+    "evidence": [
+      {
+        "feature": "laptop",
+        "tfidf": 0.11314732038570537,
+        "coefficient": 8.702909634066925,
+        "contribution": 0.9847109046536122
+      },
+      {
+        "feature": "connected",
+        "tfidf": 0.2864232881725554,
+        "coefficient": 1.2387157909978779,
+        "contribution": 0.3547970499688801
+      },
+      {
+        "feature": "rebuild",
+        "tfidf": 0.32402822392389496,
+        "coefficient": 1.0507958275638698,
+        "contribution": 0.34048750571216013
+      },
+      {
+        "feature": "wireless",
+        "tfidf": 0.14873705185206465,
+        "coefficient": 1.5292250430740422,
+        "contribution": 0.2274524245251796
+      }
+    ]
+  },
+  {
+    "record_id": "2c86694eea0cccc66042d8a943d7bc23576f08b873a3b14a33186d510ce6ee3a",
+    "actual_class": "Internal Project",
+    "text": "opportunity into pas known pipeline opportunity known pipeline hi please import bellow opportunity known pipeline opportunity id thanks officer",
+    "class": "Internal Project",
+    "justification": "The ticket was classified as Internal Project because 'pipeline', 'opportunity', 'known' and 'known pipeline' provided the strongest positive evidence for this class.",
+    "confidence": 0.9905814670267159,
+    "evidence": [
+      {
+        "feature": "pipeline",
+        "tfidf": 0.27961624587529826,
+        "coefficient": 7.968119052852525,
+        "contribution": 2.22801553624606
+      },
+      {
+        "feature": "opportunity",
+        "tfidf": 0.3117343543863757,
+        "coefficient": 3.1441864885999298,
+        "contribution": 0.9801509450940648
+      },
+      {
+        "feature": "known",
+        "tfidf": 0.2883171224239501,
+        "coefficient": 2.847546163128564,
+        "contribution": 0.8209963157225875
+      },
+      {
+        "feature": "known pipeline",
+        "tfidf": 0.3269994171860729,
+        "coefficient": 2.0796347233858348,
+        "contribution": 0.6800393425070879
+      }
+    ]
+  },
+  {
+    "record_id": "ccac8154fd0725a35f435dc8c55b7298adf169c805538ddd0f47beb4f4531c5d",
+    "actual_class": "Miscellaneous",
+    "text": "please cancel incidents as they are duplicates please cancel incidents duplicates hello please incidents cancel highlighted best regards senior engineer ext zone",
+    "class": "Miscellaneous",
+    "justification": "The ticket was classified as Miscellaneous because 'incidents', 'cancel', 'duplicates' and 'zone' provided the strongest positive evidence for this class.",
+    "confidence": 0.678430072532025,
+    "evidence": [
+      {
+        "feature": "incidents",
+        "tfidf": 0.3819454681044162,
+        "coefficient": 2.9530410069767665,
+        "contribution": 1.1279006297412777
+      },
+      {
+        "feature": "cancel",
+        "tfidf": 0.3819454681044162,
+        "coefficient": 0.6979425699778226,
+        "contribution": 0.2665760016001787
+      },
+      {
+        "feature": "duplicates",
+        "tfidf": 0.3940411897391586,
+        "coefficient": 0.5527780676901708,
+        "contribution": 0.21781732745434804
+      },
+      {
+        "feature": "zone",
+        "tfidf": 0.14859205903680706,
+        "coefficient": 1.118315181451777,
+        "contribution": 0.16617275546404006
+      }
+    ]
+  },
+  {
+    "record_id": "f65e15557227838dbdb9def0ba5351892ffb385af8c14c2fb3287e9221268b34",
+    "actual_class": "Purchase",
+    "text": "new purchase po purchase po dear purchased monitor inch wide type please log allocation after receive item please take consideration mandatory receipts section order make receipt item ordered how video link kind regards administrator",
+    "class": "Purchase",
+    "justification": "The ticket was classified as Purchase because 'po', 'purchase', 'administrator' and 'receipt' provided the strongest positive evidence for this class.",
+    "confidence": 0.9940921573679977,
+    "evidence": [
+      {
+        "feature": "po",
+        "tfidf": 0.16245924641205428,
+        "coefficient": 8.006859163672988,
+        "contribution": 1.300788305857765
+      },
+      {
+        "feature": "purchase",
+        "tfidf": 0.15997644000488936,
+        "coefficient": 7.811362649471622,
+        "contribution": 1.2496339882496306
+      },
+      {
+        "feature": "administrator",
+        "tfidf": 0.0848108858950146,
+        "coefficient": 6.0988237074141844,
+        "contribution": 0.5172466415433143
+      },
+      {
+        "feature": "receipt",
+        "tfidf": 0.13798936731340078,
+        "coefficient": 2.7307339227800123,
+        "contribution": 0.3768122463056549
+      }
+    ]
+  },
+  {
+    "record_id": "607c6562a182f02eabd5eba217c2da960421fbcf39d7dada7bb33bb6f5d1e12c",
+    "actual_class": "Storage",
+    "text": "shared folder on and access shared folder dear please assist creating shared folder well granting him folder thanks kind regards engineer",
+    "class": "Storage",
+    "justification": "The ticket was classified as Storage because 'folder', 'shared', 'shared folder' and 'access' provided the strongest positive evidence for this class.",
+    "confidence": 0.9968961986396787,
+    "evidence": [
+      {
+        "feature": "folder",
+        "tfidf": 0.29213159323835963,
+        "coefficient": 14.07462328944483,
+        "contribution": 4.11164212577524
+      },
+      {
+        "feature": "shared",
+        "tfidf": 0.2743106216916826,
+        "coefficient": 7.023441222693696,
+        "contribution": 1.9266045282120992
+      },
+      {
+        "feature": "shared folder",
+        "tfidf": 0.37761945084268245,
+        "coefficient": 1.4386679698551976,
+        "contribution": 0.5432690087216766
+      },
+      {
+        "feature": "access",
+        "tfidf": 0.06768397894939951,
+        "coefficient": 2.777895843029074,
+        "contribution": 0.18801904376320425
+      }
+    ]
+  }
+]

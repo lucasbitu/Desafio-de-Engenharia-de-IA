@@ -1,0 +1,40 @@
+{
+  "experiment": "E01_tfidf_unigram_logreg",
+  "test_accessed": false,
+  "inputs": {
+    "predictions": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e01_unigram\\outputs\\validation_predictions.csv",
+      "sha256": "22A1F6B07920A31B313C2E74043F8B890FC44301E3B9DE105550592EF597DD4A"
+    },
+    "features": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e01_unigram\\outputs\\top_features_by_class.csv",
+      "sha256": "AAE491E1810865B7BAADE32C20D0AC215C2A8167B8701CC7019823EEDC3CAE7E"
+    },
+    "model": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e01_unigram\\outputs\\baseline_model.joblib",
+      "sha256": "60E3CB99EB5FEC37501407A1C7B0D05131AB60FC0CF0E7C69C1CB5B6A9E3BA8B"
+    }
+  },
+  "parameters": {
+    "confident_error_limit": 100,
+    "confusion_pair_limit": 10,
+    "examples_per_pair": 10,
+    "feature_ranks_per_class": 15,
+    "confidence_bands": [
+      "below_0.60",
+      "0.60_to_0.75",
+      "0.75_to_0.90",
+      "0.90_to_1.00"
+    ]
+  },
+  "checks": {
+    "validation_has_expected_rows": true,
+    "record_ids_are_unique": true,
+    "all_actual_classes_exist": true,
+    "all_predicted_classes_exist": true,
+    "stored_correctness_is_consistent": true,
+    "error_counts_reconcile": true,
+    "confusion_counts_reconcile": true,
+    "confidence_band_counts_reconcile": true
+  }
+}

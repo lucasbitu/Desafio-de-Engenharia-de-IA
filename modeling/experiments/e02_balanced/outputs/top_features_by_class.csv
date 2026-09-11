@@ -1,0 +1,241 @@
+class,rank,feature,coefficient
+Access,1,confluence,12.812540765311754
+Access,2,card,10.256648628920678
+Access,3,password,10.239954229839345
+Access,4,user,10.131204354686682
+Access,5,license,9.537048684949257
+Access,6,account,8.906036318898334
+Access,7,git,7.794001865845575
+Access,8,repository,7.43288263374722
+Access,9,accounts,6.420215508811603
+Access,10,create,5.6843080704580755
+Access,11,cards,5.541865059749583
+Access,12,users,5.407446476832455
+Access,13,locked,5.370291675668712
+Access,14,reset,4.65112501737136
+Access,15,licenses,4.548502550416819
+Access,16,badge,3.9668487577978016
+Access,17,licence,3.6112884986749907
+Access,18,lost,3.5139796100018836
+Access,19,expire,3.446596035798153
+Access,20,repositories,3.332483055667928
+Access,21,visitor,3.14307768587195
+Access,22,visual,2.944137033163828
+Access,23,passwords,2.8682214323042285
+Access,24,ad,2.8650124048562122
+Access,25,studio,2.855401668009377
+Access,26,expired,2.818488990660892
+Access,27,synchronization,2.59834864704915
+Access,28,subscription,2.5974047650411287
+Access,29,sync,2.58359145008313
+Access,30,blocked,2.4334364600255043
+Administrative rights,1,outlook,15.735182788053356
+Administrative rights,2,upgrade,12.59398657859059
+Administrative rights,3,issues,7.688858220622032
+Administrative rights,4,install,5.986211806954335
+Administrative rights,5,software,5.49369171092929
+Administrative rights,6,windows,4.71970515565873
+Administrative rights,7,exchange,4.437490404458007
+Administrative rights,8,assets,4.225147703186892
+Administrative rights,9,update,4.101068610775745
+Administrative rights,10,version,4.0589315543618305
+Administrative rights,11,problems,3.24118750754372
+Administrative rights,12,app,3.1220028086610916
+Administrative rights,13,calendar,3.043909742832897
+Administrative rights,14,again,2.9749737560469898
+Administrative rights,15,server,2.9239392810922524
+Administrative rights,16,send,2.8524195277658624
+Administrative rights,17,credentials,2.8365135449349426
+Administrative rights,18,up,2.729131083675384
+Administrative rights,19,not,2.67797878606157
+Administrative rights,20,profile,2.5093912970299663
+Administrative rights,21,experiencing,2.4885079061515487
+Administrative rights,22,reinstall,2.473363494397605
+Administrative rights,23,problem,2.441136046954996
+Administrative rights,24,upgrading,2.417750264529315
+Administrative rights,25,responding,2.412479221926747
+Administrative rights,26,with,2.406917386488963
+Administrative rights,27,keeps,2.3977570483184207
+Administrative rights,28,os,2.3836086453059924
+Administrative rights,29,any,2.3802456377828145
+Administrative rights,30,workstation,2.3478250912916194
+HR Support,1,starter,7.744833928787587
+HR Support,2,error,7.424591385386719
+HR Support,3,time,7.192745330467936
+HR Support,4,leave,7.131357414021564
+HR Support,5,access,6.337653214453073
+HR Support,6,oracle,6.061288965390897
+HR Support,7,annual,5.099080362427598
+HR Support,8,leaver,4.805381264555302
+HR Support,9,submit,4.720589715175318
+HR Support,10,timecard,4.67627074417284
+HR Support,11,floor,3.6396644620422003
+HR Support,12,area,3.60506850222464
+HR Support,13,transfer,3.5464055562202943
+HR Support,14,hours,3.518560131607165
+HR Support,15,week,3.49622097349742
+HR Support,16,form,3.4715257636380246
+HR Support,17,bucharest,3.3237427265292627
+HR Support,18,to,3.1705713743606867
+HR Support,19,interns,3.052217210024376
+HR Support,20,timecards,2.918979929529747
+HR Support,21,internship,2.8129877994119825
+HR Support,22,officer,2.7112244248607555
+HR Support,23,secure,2.6687086597101786
+HR Support,24,days,2.662020359925508
+HR Support,25,leavers,2.6242736679120275
+HR Support,26,absence,2.5587241092535233
+HR Support,27,date,2.495931020282866
+HR Support,28,intern,2.485413308279227
+HR Support,29,belgrade,2.485049814862639
+HR Support,30,maternity,2.376513312450933
+Hardware,1,monitor,7.223362827144334
+Hardware,2,laptop,6.640562435066414
+Hardware,3,room,4.387122648204829
+Hardware,4,phone,3.9920138700971877
+Hardware,5,meeting,3.931359790794584
+Hardware,6,connection,3.8354985104680535
+Hardware,7,cable,3.681029462434787
+Hardware,8,ram,3.2344812758709374
+Hardware,9,backpack,3.1446842194052214
+Hardware,10,call,3.0428244085867706
+Hardware,11,calls,3.013667973633828
+Hardware,12,connect,2.9776602275776667
+Hardware,13,si,2.9430023946224724
+Hardware,14,certificate,2.8512429452015784
+Hardware,15,mobile,2.770479146968112
+Hardware,16,documents,2.7632978086460493
+Hardware,17,keyboard,2.7061052533967023
+Hardware,18,cannot,2.6461231654818733
+Hardware,19,rooms,2.626438914672453
+Hardware,20,charger,2.4879153076260234
+Hardware,21,la,2.380397836484318
+Hardware,22,you,2.3524903783911215
+Hardware,23,can,2.3523908945433836
+Hardware,24,care,2.28281977377163
+Hardware,25,machine,2.2700166723883686
+Hardware,26,network,2.231510031250105
+Hardware,27,unable,2.1908190394320664
+Hardware,28,access,2.1771712610189926
+Hardware,29,adapter,2.052247221764828
+Hardware,30,upload,2.042480717303418
+Internal Project,1,code,14.130031653816085
+Internal Project,2,project,9.747477032779132
+Internal Project,3,codes,9.245572666518134
+Internal Project,4,pipeline,9.13183566335703
+Internal Project,5,setup,7.515338102012833
+Internal Project,6,pas,5.71669428463845
+Internal Project,7,pipelines,4.723014503815978
+Internal Project,8,import,3.8859819937194686
+Internal Project,9,unknown,3.8815249721628438
+Internal Project,10,opportunity,3.8498093915275464
+Internal Project,11,known,3.54534364083577
+Internal Project,12,forecast,2.783600560460543
+Internal Project,13,pipe,2.7566072501366206
+Internal Project,14,template,2.698679189817427
+Internal Project,15,projects,2.648695074254387
+Internal Project,16,attached,2.592444135622325
+Internal Project,17,oracle,2.565919936282322
+Internal Project,18,client,2.4712765644583907
+Internal Project,19,type,2.3185599712459735
+Internal Project,20,let,2.115923605745303
+Internal Project,21,new,2.054854204525913
+Internal Project,22,party,1.924096673908534
+Internal Project,23,fusion,1.9112405184487442
+Internal Project,24,commercial,1.8939250838366637
+Internal Project,25,set,1.8451527472110152
+Internal Project,26,costs,1.7653528966441543
+Internal Project,27,create,1.706115951961214
+Internal Project,28,battery,1.6334594044040158
+Internal Project,29,up,1.6064229311853628
+Internal Project,30,christmas,1.586220614630843
+Miscellaneous,1,change,9.578163815382048
+Miscellaneous,2,approval,8.505098227866128
+Miscellaneous,3,add,7.53168355886219
+Miscellaneous,4,approve,7.161784571480586
+Miscellaneous,5,ticket,6.661803693876756
+Miscellaneous,6,groups,6.550301950755412
+Miscellaneous,7,tickets,6.287703869656266
+Miscellaneous,8,name,5.227268524601284
+Miscellaneous,9,contract,5.006676272985141
+Miscellaneous,10,approver,4.88833162439286
+Miscellaneous,11,owner,4.639564372798869
+Miscellaneous,12,approved,4.612873335780863
+Miscellaneous,13,mailing,3.9078242553400204
+Miscellaneous,14,list,3.6487502175481805
+Miscellaneous,15,approvals,3.5668369150803887
+Miscellaneous,16,members,3.3227966693795636
+Miscellaneous,17,manager,3.2879537615643164
+Miscellaneous,18,line,3.1013787682747997
+Miscellaneous,19,close,3.026795399744061
+Miscellaneous,20,pending,3.0203854424993217
+Miscellaneous,21,changes,2.930672572608044
+Miscellaneous,22,flow,2.8615945791376864
+Miscellaneous,23,incidents,2.8438590024572488
+Miscellaneous,24,ownership,2.8426693711847486
+Miscellaneous,25,incident,2.833612456802437
+Miscellaneous,26,reject,2.787696090335667
+Miscellaneous,27,approving,2.7595691935906825
+Miscellaneous,28,lists,2.740478275101512
+Miscellaneous,29,snow,2.6853564305680147
+Miscellaneous,30,member,2.5580167679398915
+Purchase,1,purchase,9.45378353868998
+Purchase,2,po,8.18079585852242
+Purchase,3,installation,7.119583292563574
+Purchase,4,administrator,6.780785300216749
+Purchase,5,device,6.298208158721732
+Purchase,6,log,5.148899258959563
+Purchase,7,devices,4.457891215157512
+Purchase,8,order,4.262631019330856
+Purchase,9,receipt,3.832159511913449
+Purchase,10,allocation,3.8134653625359625
+Purchase,11,receive,3.2407323088367477
+Purchase,12,item,3.209895221179032
+Purchase,13,requisitions,2.8903211947696157
+Purchase,14,items,2.797909350432777
+Purchase,15,phone,2.776085932485975
+Purchase,16,replenishment,2.7490709664324804
+Purchase,17,glass,2.5513613684378247
+Purchase,18,received,2.3992095723815354
+Purchase,19,reservation,2.38179264335816
+Purchase,20,cover,2.3156787406672623
+Purchase,21,has,2.06147693640003
+Purchase,22,galaxy,2.052189706261976
+Purchase,23,requested,1.9924862207647531
+Purchase,24,final,1.9169597541512324
+Purchase,25,video,1.8507417884872603
+Purchase,26,purchased,1.8379344582342398
+Purchase,27,receipts,1.8126601732337106
+Purchase,28,id,1.734622392472171
+Purchase,29,apple,1.6452054127261284
+Purchase,30,deployments,1.6211753022187962
+Storage,1,folder,12.913815747943962
+Storage,2,mailbox,11.753262900234532
+Storage,3,wants,7.8014938619579945
+Storage,4,storage,7.530799268836062
+Storage,5,shared,6.969672495587573
+Storage,6,folders,6.0868157175243125
+Storage,7,files,5.165678608836712
+Storage,8,permissions,5.096162076155313
+Storage,9,mailboxes,4.64249109785136
+Storage,10,file,4.58562954253616
+Storage,11,archive,4.455622044323326
+Storage,12,increase,4.453864705443585
+Storage,13,size,4.355684713319003
+Storage,14,accept,4.241442573417037
+Storage,15,share,4.028904832983677
+Storage,16,full,3.8877846444778035
+Storage,17,location,3.8308950025100637
+Storage,18,library,3.747352608800701
+Storage,19,decline,3.69942277715233
+Storage,20,rights,3.4618347990014517
+Storage,21,write,3.371575056770483
+Storage,22,limit,3.182211262934504
+Storage,23,drive,3.0208871568890716
+Storage,24,archiving,2.7248015649546886
+Storage,25,documentation,2.2871893615171826
+Storage,26,box,1.9895074842584728
+Storage,27,to,1.9420223294008152
+Storage,28,example,1.8789218455541903
+Storage,29,accountant,1.8573109917738557
+Storage,30,path,1.8532560060857213

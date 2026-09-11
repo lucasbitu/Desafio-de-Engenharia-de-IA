@@ -1,0 +1,57 @@
+{
+  "experiment": "E03_tfidf_unigram_bigram_logreg",
+  "changed_parameter_from_e01": {
+    "ngram_range": {
+      "e01": [
+        1,
+        1
+      ],
+      "e03": [
+        1,
+        2
+      ]
+    }
+  },
+  "test_accessed": false,
+  "selection_metric": "macro_f1",
+  "train": {
+    "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\data_split\\outputs\\train.csv",
+    "rows": 38109,
+    "sha256": "62DA11CE58FA9EAF6C3AC04A77BE24FC0C66A97864829D68CA98FDBE6FDDF894"
+  },
+  "validation": {
+    "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\data_split\\outputs\\validation.csv",
+    "rows": 9528,
+    "sha256": "4EEA86B63A3E3D7186C6F52C3FFF41D6D8E266679D7B9496428E3E2971366DB0"
+  },
+  "comparison_inputs": {
+    "e01_metrics_sha256": "14A45D20A90B4E5BD1C027D18D8F176812FBEB9B87F76C23359A98021EE88875",
+    "e02_metrics_sha256": "C8A6DE34F20A4D8AF58A9503CEEC9EB51C7F439CDEC33D5AAC690FD80D279499"
+  },
+  "vocabulary_size": 143673,
+  "bigram_count": 135129,
+  "errors": {
+    "total_errors": 1449,
+    "hardware_false_positives": 717
+  },
+  "checks": {
+    "train_validation_do_not_overlap": true,
+    "train_record_ids_are_unique": true,
+    "validation_record_ids_are_unique": true,
+    "class_sets_match": true,
+    "all_eight_classes_exist": true,
+    "ngram_range_is_one_to_two": true,
+    "class_weight_remains_none": true,
+    "vocabulary_contains_bigrams": true,
+    "validation_predictions_have_expected_rows": true,
+    "prediction_correctness_reconciles": true
+  },
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pandas": "2.3.3",
+    "numpy": "2.4.3",
+    "scikit_learn": "1.8.0",
+    "joblib": "1.5.3"
+  }
+}

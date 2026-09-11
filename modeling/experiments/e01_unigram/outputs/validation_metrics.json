@@ -1,0 +1,136 @@
+{
+  "E00_majority": {
+    "accuracy": 0.28463476070528965,
+    "macro_f1": 0.055392156862745096,
+    "classification_report": {
+      "Access": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 1419.0
+      },
+      "Administrative rights": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 351.0
+      },
+      "HR Support": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 2174.0
+      },
+      "Hardware": {
+        "precision": 0.28463476070528965,
+        "recall": 1.0,
+        "f1-score": 0.44313725490196076,
+        "support": 2712.0
+      },
+      "Internal Project": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 422.0
+      },
+      "Miscellaneous": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 1406.0
+      },
+      "Purchase": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 491.0
+      },
+      "Storage": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 553.0
+      },
+      "accuracy": 0.28463476070528965,
+      "macro avg": {
+        "precision": 0.035579345088161206,
+        "recall": 0.125,
+        "f1-score": 0.055392156862745096,
+        "support": 9528.0
+      },
+      "weighted avg": {
+        "precision": 0.0810169470017575,
+        "recall": 0.28463476070528965,
+        "f1-score": 0.12613226650861856,
+        "support": 9528.0
+      }
+    }
+  },
+  "E01_tfidf_unigram_logreg": {
+    "accuracy": 0.8536943744752309,
+    "macro_f1": 0.8533819045949145,
+    "classification_report": {
+      "Access": {
+        "precision": 0.92003046458492,
+        "recall": 0.8513037350246653,
+        "f1-score": 0.8843338213762811,
+        "support": 1419.0
+      },
+      "Administrative rights": {
+        "precision": 0.9045801526717557,
+        "recall": 0.6752136752136753,
+        "f1-score": 0.7732463295269169,
+        "support": 351.0
+      },
+      "HR Support": {
+        "precision": 0.858325666973321,
+        "recall": 0.858325666973321,
+        "f1-score": 0.858325666973321,
+        "support": 2174.0
+      },
+      "Hardware": {
+        "precision": 0.7901713546718396,
+        "recall": 0.9011799410029498,
+        "f1-score": 0.8420327304048234,
+        "support": 2712.0
+      },
+      "Internal Project": {
+        "precision": 0.9473684210526315,
+        "recall": 0.7677725118483413,
+        "f1-score": 0.8481675392670157,
+        "support": 422.0
+      },
+      "Miscellaneous": {
+        "precision": 0.8233657858136301,
+        "recall": 0.8421052631578947,
+        "f1-score": 0.8326300984528833,
+        "support": 1406.0
+      },
+      "Purchase": {
+        "precision": 0.9700460829493087,
+        "recall": 0.8574338085539714,
+        "f1-score": 0.9102702702702703,
+        "support": 491.0
+      },
+      "Storage": {
+        "precision": 0.9533898305084746,
+        "recall": 0.8137432188065099,
+        "f1-score": 0.8780487804878049,
+        "support": 553.0
+      },
+      "accuracy": 0.8536943744752309,
+      "macro avg": {
+        "precision": 0.8959097199032351,
+        "recall": 0.8208847275726661,
+        "f1-score": 0.8533819045949145,
+        "support": 9528.0
+      },
+      "weighted avg": {
+        "precision": 0.859879780461932,
+        "recall": 0.8536943744752309,
+        "f1-score": 0.8540071596728238,
+        "support": 9528.0
+      }
+    }
+  }
+}

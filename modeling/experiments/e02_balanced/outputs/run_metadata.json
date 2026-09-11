@@ -1,0 +1,107 @@
+{
+  "experiment": "E02_tfidf_unigram_logreg_balanced",
+  "changed_parameter_from_e01": {
+    "class_weight": {
+      "e01": null,
+      "e02": "balanced"
+    }
+  },
+  "test_accessed": false,
+  "selection_metric": "macro_f1",
+  "train": {
+    "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\data_split\\outputs\\train.csv",
+    "rows": 38109,
+    "sha256": "62DA11CE58FA9EAF6C3AC04A77BE24FC0C66A97864829D68CA98FDBE6FDDF894"
+  },
+  "validation": {
+    "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\data_split\\outputs\\validation.csv",
+    "rows": 9528,
+    "sha256": "4EEA86B63A3E3D7186C6F52C3FFF41D6D8E266679D7B9496428E3E2971366DB0"
+  },
+  "e01_metrics": {
+    "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e01_unigram\\outputs\\validation_metrics.json",
+    "sha256": "14A45D20A90B4E5BD1C027D18D8F176812FBEB9B87F76C23359A98021EE88875"
+  },
+  "vocabulary_size": 8544,
+  "errors": {
+    "total_errors": 1403,
+    "hardware_false_positives": 367,
+    "per_class": [
+      {
+        "Topic_group": "Access",
+        "total": 1419,
+        "correct": 1240,
+        "errors": 179,
+        "error_rate": 0.12614517265680056
+      },
+      {
+        "Topic_group": "Administrative rights",
+        "total": 351,
+        "correct": 313,
+        "errors": 38,
+        "error_rate": 0.10826210826210826
+      },
+      {
+        "Topic_group": "HR Support",
+        "total": 2174,
+        "correct": 1794,
+        "errors": 380,
+        "error_rate": 0.17479300827966882
+      },
+      {
+        "Topic_group": "Hardware",
+        "total": 2712,
+        "correct": 2207,
+        "errors": 505,
+        "error_rate": 0.1862094395280236
+      },
+      {
+        "Topic_group": "Internal Project",
+        "total": 422,
+        "correct": 394,
+        "errors": 28,
+        "error_rate": 0.06635071090047394
+      },
+      {
+        "Topic_group": "Miscellaneous",
+        "total": 1406,
+        "correct": 1227,
+        "errors": 179,
+        "error_rate": 0.12731152204836416
+      },
+      {
+        "Topic_group": "Purchase",
+        "total": 491,
+        "correct": 441,
+        "errors": 50,
+        "error_rate": 0.10183299389002037
+      },
+      {
+        "Topic_group": "Storage",
+        "total": 553,
+        "correct": 509,
+        "errors": 44,
+        "error_rate": 0.07956600361663653
+      }
+    ]
+  },
+  "checks": {
+    "train_validation_do_not_overlap": true,
+    "train_record_ids_are_unique": true,
+    "validation_record_ids_are_unique": true,
+    "class_sets_match": true,
+    "all_eight_classes_exist": true,
+    "same_vocabulary_size_as_e01": true,
+    "class_weight_is_balanced": true,
+    "validation_predictions_have_expected_rows": true,
+    "prediction_correctness_reconciles": true
+  },
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pandas": "2.3.3",
+    "numpy": "2.4.3",
+    "scikit_learn": "1.8.0",
+    "joblib": "1.5.3"
+  }
+}

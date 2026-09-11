@@ -1,0 +1,59 @@
+{
+  "experiment": "E01_tfidf_unigram_logreg",
+  "random_seed": 42,
+  "test_accessed": false,
+  "selection_metric": "macro_f1",
+  "train": {
+    "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\data_split\\outputs\\train.csv",
+    "rows": 38109,
+    "sha256": "62DA11CE58FA9EAF6C3AC04A77BE24FC0C66A97864829D68CA98FDBE6FDDF894"
+  },
+  "validation": {
+    "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\data_split\\outputs\\validation.csv",
+    "rows": 9528,
+    "sha256": "4EEA86B63A3E3D7186C6F52C3FFF41D6D8E266679D7B9496428E3E2971366DB0"
+  },
+  "classes": [
+    "Access",
+    "Administrative rights",
+    "HR Support",
+    "Hardware",
+    "Internal Project",
+    "Miscellaneous",
+    "Purchase",
+    "Storage"
+  ],
+  "vocabulary_size": 8544,
+  "configuration": {
+    "tfidf": {
+      "ngram_range": [
+        1,
+        1
+      ],
+      "min_df": 2,
+      "norm": "l2",
+      "sublinear_tf": true
+    },
+    "logistic_regression": {
+      "C": 1.0,
+      "solver": "lbfgs",
+      "max_iter": 1000,
+      "class_weight": null
+    }
+  },
+  "checks": {
+    "train_validation_do_not_overlap": true,
+    "train_record_ids_are_unique": true,
+    "validation_record_ids_are_unique": true,
+    "class_sets_match": true,
+    "all_eight_classes_exist": true
+  },
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pandas": "2.3.3",
+    "numpy": "2.4.3",
+    "scikit_learn": "1.8.0",
+    "joblib": "1.5.3"
+  }
+}
