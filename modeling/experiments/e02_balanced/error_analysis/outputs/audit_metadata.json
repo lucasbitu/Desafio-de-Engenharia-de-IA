@@ -1,0 +1,47 @@
+{
+  "experiment": "E02_tfidf_unigram_logreg_balanced",
+  "test_accessed": false,
+  "comparison": {
+    "e01": {
+      "total_errors": 1394,
+      "hardware_false_positives": 649,
+      "high_confidence_errors": 65
+    }
+  },
+  "inputs": {
+    "predictions": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e02_balanced\\outputs\\validation_predictions.csv",
+      "sha256": "E733F5B564CE7AC0410CF811C29EFF89BC0B7757844BB03371380ECE2D37D8A5"
+    },
+    "features": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e02_balanced\\outputs\\top_features_by_class.csv",
+      "sha256": "080D09A0EB62E097255BDCB13A2E7244BAE8798AFA76CFC2B2C6C62C9AF054D0"
+    },
+    "model": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e02_balanced\\outputs\\model.joblib",
+      "sha256": "3100A7F9BDF6049A99EFD91E9130F4F196C663099D63BEAEFE8CB7F9B9222EDA"
+    },
+    "e01_audit": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e01_unigram\\error_analysis\\outputs\\audit_metadata.json",
+      "sha256": "DA60E8F2B9AE942495A6B1EE5AE03E398C33D159D7A388F57F7C9EFC0E902A0B"
+    }
+  },
+  "parameters": {
+    "confident_error_limit": 100,
+    "confidence_threshold": 0.9,
+    "confusion_pair_limit": 10,
+    "examples_per_pair": 10,
+    "feature_ranks_per_class": 15
+  },
+  "checks": {
+    "validation_has_expected_rows": true,
+    "record_ids_are_unique": true,
+    "all_actual_classes_exist": true,
+    "all_predicted_classes_exist": true,
+    "stored_correctness_is_consistent": true,
+    "error_counts_reconcile": true,
+    "confusion_counts_reconcile": true,
+    "confidence_band_counts_reconcile": true,
+    "model_uses_balanced_weights": true
+  }
+}

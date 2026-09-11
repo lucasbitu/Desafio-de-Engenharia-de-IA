@@ -1,0 +1,4 @@
+model,total_errors,hardware_false_positives,administrative_rights_false_positives,high_confidence_errors
+E01,1394,649,25,65
+E02,1403,367,158,54
+E04,1361,498,73,52

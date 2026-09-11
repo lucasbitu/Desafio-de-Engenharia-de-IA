@@ -1,0 +1,50 @@
+{
+  "experiment": "E04_tfidf_unigram_logreg_moderate_weights",
+  "test_accessed": false,
+  "pairwise": {
+    "versus_e01": {
+      "both_correct": 7978,
+      "both_wrong": 1205,
+      "fixed_by_e04": 189,
+      "broken_by_e04": 156
+    },
+    "versus_e02": {
+      "both_correct": 7962,
+      "both_wrong": 1198,
+      "fixed_by_e04": 205,
+      "broken_by_e04": 163
+    }
+  },
+  "inputs": {
+    "predictions": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e04_moderate_weights\\outputs\\validation_predictions.csv",
+      "sha256": "6B78BE3BB725FCAC5D13E1D14D56BBA73B4E1D0AC70567A773ED52E1E6374ED4"
+    },
+    "features": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e04_moderate_weights\\outputs\\top_features_by_class.csv",
+      "sha256": "41694C19C8D2C44DA552D0600C6553126EAF7FE789E6011ED9406CEB267A2190"
+    },
+    "model": {
+      "path": "D:\\Dhauz\\Desafio-de-Engenharia-de-IA---CLASSIFICA-O-DE-CHAMADOS-DE-IA-GENERATIVA\\modeling\\experiments\\e04_moderate_weights\\outputs\\model.joblib",
+      "sha256": "A56E1DF1B17D100D71CA2E5027B7FC60612502ABEF09DF34AE68B0EB008E6884"
+    },
+    "e01_predictions": {
+      "sha256": "22A1F6B07920A31B313C2E74043F8B890FC44301E3B9DE105550592EF597DD4A"
+    },
+    "e02_predictions": {
+      "sha256": "E733F5B564CE7AC0410CF811C29EFF89BC0B7757844BB03371380ECE2D37D8A5"
+    }
+  },
+  "checks": {
+    "validation_has_expected_rows": true,
+    "record_ids_are_unique": true,
+    "comparison_uses_same_record_ids": true,
+    "all_actual_classes_exist": true,
+    "all_predicted_classes_exist": true,
+    "stored_correctness_is_consistent": true,
+    "error_counts_reconcile": true,
+    "confusion_counts_reconcile": true,
+    "confidence_band_counts_reconcile": true,
+    "model_uses_custom_weights": true
+  }
+}

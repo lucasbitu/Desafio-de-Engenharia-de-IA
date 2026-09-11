@@ -1,0 +1,69 @@
+{
+  "E04_tfidf_unigram_logreg_moderate_weights": {
+    "accuracy": 0.8571578505457599,
+    "macro_f1": 0.8617016202371395,
+    "classification_report": {
+      "Access": {
+        "precision": 0.9114583333333334,
+        "recall": 0.8632840028188865,
+        "f1-score": 0.8867173362287368,
+        "support": 1419.0
+      },
+      "Administrative rights": {
+        "precision": 0.7914285714285715,
+        "recall": 0.7891737891737892,
+        "f1-score": 0.7902995720399429,
+        "support": 351.0
+      },
+      "HR Support": {
+        "precision": 0.8735083532219571,
+        "recall": 0.8417663293468262,
+        "f1-score": 0.8573436401967673,
+        "support": 2174.0
+      },
+      "Hardware": {
+        "precision": 0.8248945147679325,
+        "recall": 0.8650442477876106,
+        "f1-score": 0.8444924406047516,
+        "support": 2712.0
+      },
+      "Internal Project": {
+        "precision": 0.8843373493975903,
+        "recall": 0.8696682464454977,
+        "f1-score": 0.8769414575866189,
+        "support": 422.0
+      },
+      "Miscellaneous": {
+        "precision": 0.8053333333333333,
+        "recall": 0.8591749644381224,
+        "f1-score": 0.8313833448038541,
+        "support": 1406.0
+      },
+      "Purchase": {
+        "precision": 0.9366812227074236,
+        "recall": 0.8737270875763747,
+        "f1-score": 0.9041095890410958,
+        "support": 491.0
+      },
+      "Storage": {
+        "precision": 0.9291187739463601,
+        "recall": 0.8770343580470162,
+        "f1-score": 0.9023255813953488,
+        "support": 553.0
+      },
+      "accuracy": 0.8571578505457599,
+      "macro avg": {
+        "precision": 0.8695950565170627,
+        "recall": 0.8548591282042654,
+        "f1-score": 0.8617016202371395,
+        "support": 9528.0
+      },
+      "weighted avg": {
+        "precision": 0.8592017294270285,
+        "recall": 0.8571578505457599,
+        "f1-score": 0.8576483790122832,
+        "support": 9528.0
+      }
+    }
+  }
+}
