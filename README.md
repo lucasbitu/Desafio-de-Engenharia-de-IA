@@ -102,7 +102,9 @@ LLM, RAG e embeddings foram considerados, mas não foram adotados no caminho pri
 
 - um LLM acrescentaria custo, latência, variabilidade e exposição dos tickets a um serviço externo;
 - RAG aumentaria a complexidade sem necessidade demonstrada para oito classes supervisionadas;
-- embeddings poderiam melhorar generalização semântica, mas reduziriam a transparência direta e exigiriam uma comparação adicional.
+- embeddings poderiam melhorar generalização semântica, mas reduziriam a transparência direta e exigiriam uma comparação adicional. 
+
+Além disso, os textos do dataset aparentam ter passado por pré-processamento anterior, com perda parcial de estrutura gramatical. Isso reduz parte do contexto linguístico que abordagens semânticas poderiam explorar. Em contrapartida, o grande volume de exemplos rotulados e a presença de sinais lexicais discriminativos entre as classes favorecem uma abordagem supervisionada baseada em TF-IDF.
 
 ## Seleção do modelo
 
