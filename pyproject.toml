@@ -20,6 +20,13 @@ dependencies = [
 interface = [
   "streamlit==1.49.1",
 ]
+llm = [
+  "openai==2.54.0",
+]
+delivery = [
+  "streamlit==1.49.1",
+  "openai==2.54.0",
+]
 
 [project.scripts]
 ticket-train = "ticket_classifier.training:main"

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Protocol
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -23,15 +24,41 @@ class PredictionDiagnostics(BaseModel):
     evidence: tuple[Evidence, ...]
 
 
+class JustificationRewriter(Protocol):
+    """Optional presentation-only rewriter; it has no authority over classification."""
+
+    def rewrite(
+        self,
+        classification: ClassificationResult,
+        fallback: str,
+        *,
+        low_confidence: bool,
+    ) -> str: ...
+
+
 class DeliveryPredictionService:
     """Apply the frozen confidence policy without changing the predicted class."""
 
-    def __init__(self, classifier: TicketClassifier) -> None:
+    def __init__(
+        self,
+        classifier: TicketClassifier,
+        *,
+        justification_rewriter: JustificationRewriter | None = None,
+    ) -> None:
         self._classifier = classifier
+        self._justification_rewriter = justification_rewriter
 
     @classmethod
-    def from_model_path(cls, path: str | Path) -> "DeliveryPredictionService":
-        return cls(TicketClassifier.from_path(path))
+    def from_model_path(
+        cls,
+        path: str | Path,
+        *,
+        justification_rewriter: JustificationRewriter | None = None,
+    ) -> "DeliveryPredictionService":
+        return cls(
+            TicketClassifier.from_path(path),
+            justification_rewriter=justification_rewriter,
+        )
 
     @property
     def classes(self) -> tuple[str, ...]:
@@ -60,11 +87,21 @@ class DeliveryPredictionService:
                 "evidence": diagnostics.evidence,
             }
         )
-        justification = (
+        fallback = (
             _low_confidence_justification(classification)
             if diagnostics.low_confidence
             else deterministic_justification(classification)
         )
+        justification = fallback
+        if self._justification_rewriter is not None:
+            try:
+                justification = self._justification_rewriter.rewrite(
+                    classification,
+                    fallback,
+                    low_confidence=diagnostics.low_confidence,
+                )
+            except Exception:
+                justification = fallback
         return PredictionOutput(
             **{"class": diagnostics.class_, "justification": justification}
         )

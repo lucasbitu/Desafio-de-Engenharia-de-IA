@@ -1,0 +1,30 @@
+"""Static delivery-safety checks for the container configuration."""
+
+from __future__ import annotations
+
+import unittest
+
+from ticket_classifier.config import PROJECT_ROOT
+
+
+class ContainerContractTest(unittest.TestCase):
+    def test_final_test_is_excluded_from_docker_context(self) -> None:
+        dockerignore = (PROJECT_ROOT / ".dockerignore").read_text(encoding="utf-8")
+        self.assertIn("data_split/outputs/test.csv", dockerignore.splitlines())
+
+    def test_image_trains_only_from_development_partitions(self) -> None:
+        dockerfile = (PROJECT_ROOT / "Dockerfile").read_text(encoding="utf-8").casefold()
+        self.assertIn("train.csv", dockerfile)
+        self.assertIn("validation.csv", dockerfile)
+        self.assertNotIn("test.csv", dockerfile)
+        self.assertNotIn("ticket-final-evaluate", dockerfile)
+
+    def test_compose_passes_api_key_only_at_runtime(self) -> None:
+        compose = (PROJECT_ROOT / "compose.yaml").read_text(encoding="utf-8")
+        dockerfile = (PROJECT_ROOT / "Dockerfile").read_text(encoding="utf-8")
+        self.assertIn("OPENAI_API_KEY: ${OPENAI_API_KEY:-}", compose)
+        self.assertNotIn("OPENAI_API_KEY", dockerfile)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -37,11 +37,16 @@ Ticket
   -> classe e confiança estimada
   -> contribuições locais positivas
   -> política de baixa confiança
-  -> justificativa determinística
+  -> justificativa determinística de segurança
+  -> reescrita opcional por LLM
+       -> válida: linguagem natural apoiada nas evidências
+       -> erro ou saída inválida: fallback determinístico
   -> JSON {"class": "...", "justification": "..."}
 ```
 
-O classificador é a única autoridade sobre a classe. A justificativa não pode mudar a previsão nem citar evidências ausentes do texto.
+O classificador é a única autoridade sobre a classe. O LLM é uma camada opcional de
+apresentação: não pode mudar previsão, confiança ou evidências, e a aplicação continua
+funcional sem credenciais ou disponibilidade do provedor.
 
 ## Modelo selecionado
 
@@ -91,6 +96,12 @@ Para instalar também a interface:
 
 ```powershell
 .venv\Scripts\python -m pip install -e ".[interface]"
+```
+
+Para instalar interface e reescrita generativa opcional:
+
+```powershell
+.venv\Scripts\python -m pip install -e ".[delivery]"
 ```
 
 ## Dados congelados
@@ -156,6 +167,34 @@ A interface reutiliza `DeliveryPredictionService`, exibe a classe e a justificat
 contrato público exigido e oferece diagnósticos de confiança opcionais. Ela não carrega
 datasets, não calcula métricas e não conhece o caminho do teste final.
 
+Por padrão, a justificativa permanece determinística. Para ativar somente a reescrita:
+
+```powershell
+$env:ENABLE_LLM_JUSTIFICATION="true"
+$env:OPENAI_API_KEY="sua-chave"
+$env:OPENAI_MODEL="gpt-5-mini"
+.venv\Scripts\streamlit run app.py
+```
+
+A chamada usa a Responses API sem armazenamento da resposta (`store=false`). O LLM recebe
+apenas classe, confiança, indicador de baixa confiança, evidências permitidas e o fallback.
+Saída sem a classe, sem evidência permitida, longa demais ou sem alerta obrigatório é
+rejeitada e substituída automaticamente pela justificativa determinística.
+
+## Docker
+
+A imagem instala as dependências, reproduz o modelo de desenvolvimento durante o build e
+inicia o Streamlit na porta 8501:
+
+```powershell
+docker compose up --build
+```
+
+A aplicação ficará disponível em `http://localhost:8501`. Para ativar o LLM no Compose,
+defina `ENABLE_LLM_JUSTIFICATION=true`, `OPENAI_API_KEY` e, opcionalmente, `OPENAI_MODEL`
+no ambiente antes do comando. A chave não é copiada para a imagem; ela é passada somente em
+tempo de execução.
+
 ## Reprodução em ambiente limpo
 
 O candidato de entrega foi auditado em uma cópia local limpa com um ambiente virtual novo.
@@ -195,6 +234,7 @@ nesta execução não podem retroalimentar modelo, features, pesos, limiar ou ju
 - [ADR-006](docs/decisions/ADR-006-clean-environment-reproduction.md): reprodução em ambiente limpo.
 - [ADR-007](docs/decisions/ADR-007-isolated-final-evaluator.md): executor final isolado.
 - [ADR-008](docs/decisions/ADR-008-release-candidate-audit.md): auditoria do candidato de entrega.
+- [ADR-009](docs/decisions/ADR-009-optional-llm-rewriting.md): reescrita generativa opcional sem grafo.
 
 ## Limitações conhecidas
 
@@ -210,3 +250,7 @@ nesta execução não podem retroalimentar modelo, features, pesos, limiar ou ju
 A implementação e a avaliação final estão concluídas. Antes do envio, resta somente revisar
 o conteúdo do repositório e preparar a apresentação da solução; o modelo está definitivamente
 congelado e não deve receber ajustes baseados no teste final.
+
+A reescrita generativa e a conteinerização foram adicionadas depois da avaliação final como
+recursos de entrega. Elas não alteram o classificador congelado e não foram avaliadas nem
+ajustadas usando os 200 tickets finais.
