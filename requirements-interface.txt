@@ -1,0 +1,2 @@
+# Optional dependency for the thin interactive presentation layer.
+streamlit==1.49.1
