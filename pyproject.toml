@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantumrise-ticket-classifier"
+version = "0.1.0"
+description = "Explainable classification of IT service tickets"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "joblib==1.5.3",
+  "numpy==2.4.3",
+  "pandas==2.3.3",
+  "pydantic==2.11.7",
+  "scikit-learn==1.8.0",
+]
+
+[project.scripts]
+ticket-train = "ticket_classifier.training:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
