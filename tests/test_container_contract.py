@@ -28,6 +28,10 @@ class ContainerContractTest(unittest.TestCase):
         self.assertNotIn("OPENAI_API_KEY", dockerfile)
         self.assertNotIn("GEMINI_API_KEY", dockerfile)
 
+    def test_dockerfile_sets_explicit_project_root(self) -> None:
+        dockerfile = (PROJECT_ROOT / "Dockerfile").read_text(encoding="utf-8")
+        self.assertIn("TICKET_CLASSIFIER_PROJECT_ROOT=/app", dockerfile)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,13 @@
+services:
+  classifier:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      ENABLE_LLM_JUSTIFICATION: ${ENABLE_LLM_JUSTIFICATION:-false}
+      LLM_PROVIDER: ${LLM_PROVIDER:-gemini}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash-lite}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5-mini}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    restart: unless-stopped

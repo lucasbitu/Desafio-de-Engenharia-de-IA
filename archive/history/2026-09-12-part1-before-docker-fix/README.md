@@ -87,13 +87,10 @@ Requer Python 3.11, 3.12 ou 3.13.
 ```powershell
 py -3 -m venv .venv
 .venv\Scripts\python -m pip install --upgrade pip
-.venv\Scripts\python -m pip install -r requirements.txt
-.venv\Scripts\python -m pip install --no-deps -e .
+.venv\Scripts\python -m pip install -e .
 ```
 
-As versões das dependências estão fixadas em `requirements.txt` e espelham as versões
-declaradas em `pyproject.toml`. O segundo comando instala somente o pacote local e seus
-atalhos de linha de comando, sem recalcular as dependências já instaladas.
+As versões das dependências estão fixadas em `pyproject.toml`.
 
 Para instalar também a interface:
 
@@ -208,19 +205,6 @@ defina `ENABLE_LLM_JUSTIFICATION=true`, `LLM_PROVIDER=gemini` e `GEMINI_API_KEY`
 antes do comando. `GEMINI_MODEL` é opcional. As mesmas variáveis `OPENAI_*` continuam
 disponíveis quando `LLM_PROVIDER=openai`. Nenhuma chave é copiada para a imagem; elas são
 passadas somente em tempo de execução.
-
-Para validar um build sem reaproveitar camadas anteriores:
-
-```powershell
-docker compose down --remove-orphans
-docker compose build --no-cache
-docker compose up -d
-docker compose ps
-```
-
-O contêiner define `TICKET_CLASSIFIER_PROJECT_ROOT=/app`. Essa raiz explícita garante que
-os splits e artefatos sejam resolvidos dentro da aplicação mesmo quando o pacote Python é
-instalado em `site-packages`.
 
 ## Reprodução em ambiente limpo
 

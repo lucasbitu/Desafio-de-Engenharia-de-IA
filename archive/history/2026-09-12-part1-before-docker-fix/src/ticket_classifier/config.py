@@ -1,11 +1,8 @@
 """Canonical configuration frozen by ADR-002."""
 
-import os
 from pathlib import Path
 
-PROJECT_ROOT = Path(
-    os.environ.get("TICKET_CLASSIFIER_PROJECT_ROOT", Path(__file__).resolve().parents[2])
-).resolve()
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 TEXT_COLUMN = "Document"
 LABEL_COLUMN = "Topic_group"
