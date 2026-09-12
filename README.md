@@ -19,15 +19,13 @@ Concluído:
 - testes automatizados do núcleo;
 - interface interativa Streamlit;
 - reprodução aprovada em ambiente virtual limpo;
-- executor final isolado validado somente com dados sintéticos.
+- executor final isolado validado com dados sintéticos;
+- release candidate `release-candidate-v1` auditado e congelado;
+- avaliação única dos 200 tickets finais concluída;
+- relatório final de teste publicado.
 
-Ainda não implementado:
-
-- autorização explícita para abrir o teste final;
-- execução única do treinamento final em treino mais validação e da avaliação dos 200 tickets;
-- revisão e publicação do relatório final de teste.
-
-O `test.csv` permanece fora dos módulos de desenvolvimento e só poderá ser acessado depois do congelamento do release candidate.
+O teste final foi aberto uma única vez depois do congelamento do release candidate. Seus
+resultados não foram usados para alterar o modelo ou qualquer decisão de desenvolvimento.
 
 ## Arquitetura
 
@@ -62,6 +60,10 @@ O E04 usa:
 - pesos `sqrt(N / (K * n_k))`, normalizados para peso médio por amostra igual a 1.
 
 Na validação congelada, o E04 obteve accuracy 0,8572 e macro-F1 0,8617.
+
+No teste final congelado de 200 tickets, após treinamento em treino mais validação, obteve
+accuracy 0,9050, macro-F1 0,9135 e weighted-F1 0,9061. Consulte o
+[relatório final](docs/final-evaluation-report.md).
 
 ## Baixa confiança
 
@@ -203,9 +205,8 @@ nesta execução não podem retroalimentar modelo, features, pesos, limiar ou ju
 - baixa confiança representa incerteza, não erro;
 - algumas classes compartilham vocabulário e continuam ambíguas.
 
-## Próxima etapa
+## Estado de entrega
 
-Obter autorização explícita e separada para executar uma única vez o avaliador final no
-release candidate congelado. Depois da execução, revisar os artefatos em `artifacts/final/`
-e incorporar ao relatório apenas os resultados observados, sem novos ajustes de modelo,
-limiar ou justificativa.
+A implementação e a avaliação final estão concluídas. Antes do envio, resta somente revisar
+o conteúdo do repositório e preparar a apresentação da solução; o modelo está definitivamente
+congelado e não deve receber ajustes baseados no teste final.
