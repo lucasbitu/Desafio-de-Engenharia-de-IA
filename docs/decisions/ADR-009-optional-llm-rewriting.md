@@ -16,9 +16,9 @@ complexidade conceitual sem oferecer benefício proporcional.
 
 ## Decisão
 
-Implementar uma porta `JustificationRewriter` opcional dentro do serviço de entrega e um
-adaptador `OpenAIJustificationRewriter` para a Responses API. A orquestração continuará
-explícita em Python comum, sem agente e sem LangGraph.
+Implementar uma porta `JustificationRewriter` opcional dentro do serviço de entrega, com
+adaptadores para Gemini e OpenAI. O provedor é selecionado por configuração e a orquestração
+continuará explícita em Python comum, sem agente e sem LangGraph.
 
 O fluxo é:
 
@@ -38,14 +38,21 @@ ticket -> classificador congelado -> classe/confiança/evidências
 - a resposta deve conter a classe exata e pelo menos uma evidência fornecida;
 - são permitidas de uma a três sentenças e no máximo 600 caracteres;
 - baixa confiança exige indicação de possível revisão humana;
-- respostas da API não são armazenadas por solicitação (`store=false`);
+- chamadas OpenAI solicitam que a resposta não seja armazenada (`store=false`);
 - timeout, indisponibilidade, credencial ausente ou violação do contrato acionam o fallback;
 - o contrato público permanece formado somente por `class` e `justification`.
 
 ## Configuração
 
-A funcionalidade vem desativada. Sua ativação exige `ENABLE_LLM_JUSTIFICATION=true` e
-`OPENAI_API_KEY`; `OPENAI_MODEL` permite selecionar o modelo e usa `gpt-5-mini` como padrão.
+A funcionalidade vem desativada. Sua ativação exige `ENABLE_LLM_JUSTIFICATION=true`. O
+provedor padrão é `gemini`, configurado por `GEMINI_API_KEY` e, opcionalmente,
+`GEMINI_MODEL`; o modelo padrão é `gemini-2.5-flash-lite`. `LLM_PROVIDER=openai` seleciona
+o adaptador anterior e suas variáveis `OPENAI_*`.
+
+O nível gratuito do Gemini é adequado somente à demonstração com entradas não sensíveis.
+Pelos termos vigentes, conteúdo e respostas dessa modalidade podem ser usados para melhorar
+produtos Google e passar por revisão humana. Tickets confidenciais, pessoais ou de produção
+não devem ser enviados por essa rota.
 
 ## Consequências
 

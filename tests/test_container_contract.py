@@ -23,7 +23,10 @@ class ContainerContractTest(unittest.TestCase):
         compose = (PROJECT_ROOT / "compose.yaml").read_text(encoding="utf-8")
         dockerfile = (PROJECT_ROOT / "Dockerfile").read_text(encoding="utf-8")
         self.assertIn("OPENAI_API_KEY: ${OPENAI_API_KEY:-}", compose)
+        self.assertIn("GEMINI_API_KEY: ${GEMINI_API_KEY:-}", compose)
+        self.assertIn("LLM_PROVIDER: ${LLM_PROVIDER:-gemini}", compose)
         self.assertNotIn("OPENAI_API_KEY", dockerfile)
+        self.assertNotIn("GEMINI_API_KEY", dockerfile)
 
 
 if __name__ == "__main__":

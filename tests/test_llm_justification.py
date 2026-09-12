@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import unittest
 from types import SimpleNamespace
+from unittest.mock import patch
 
 from ticket_classifier.delivery import DeliveryPredictionService
 from ticket_classifier.llm_justification import (
     InvalidLLMJustification,
+    GeminiJustificationRewriter,
     OpenAIJustificationRewriter,
+    rewriter_from_environment,
     validate_llm_justification,
 )
 from ticket_classifier.schemas import ClassificationResult, Evidence
@@ -35,6 +38,16 @@ class FakeResponses:
     def create(self, **kwargs):
         self.calls.append(kwargs)
         return SimpleNamespace(output_text=self.output_text)
+
+
+class FakeGeminiModels:
+    def __init__(self, text: str) -> None:
+        self.text = text
+        self.calls: list[dict] = []
+
+    def generate_content(self, **kwargs):
+        self.calls.append(kwargs)
+        return SimpleNamespace(text=self.text)
 
 
 class FakeClassifier:
@@ -77,6 +90,28 @@ class LLMJustificationTest(unittest.TestCase):
                 classification(),
                 low_confidence=False,
             )
+
+    def test_valid_gemini_rewrite_uses_same_grounded_contract(self) -> None:
+        models = FakeGeminiModels(
+            "The Access classification is supported by the password evidence."
+        )
+        rewriter = GeminiJustificationRewriter(
+            SimpleNamespace(models=models), model="gemini-test-model"
+        )
+
+        output = rewriter.rewrite(
+            classification(), "fallback", low_confidence=False
+        )
+
+        self.assertIn("Access", output)
+        self.assertEqual(models.calls[0]["model"], "gemini-test-model")
+        self.assertEqual(models.calls[0]["config"]["max_output_tokens"], 180)
+        self.assertNotIn("reset password", models.calls[0]["contents"])
+
+    def test_provider_factory_rejects_unknown_provider(self) -> None:
+        with patch.dict("os.environ", {"LLM_PROVIDER": "unknown"}, clear=True):
+            with self.assertRaisesRegex(RuntimeError, "gemini.*openai"):
+                rewriter_from_environment()
 
     def test_low_confidence_rewrite_must_preserve_warning(self) -> None:
         with self.assertRaises(InvalidLLMJustification):

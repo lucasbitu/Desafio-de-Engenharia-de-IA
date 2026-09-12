@@ -171,15 +171,25 @@ Por padrão, a justificativa permanece determinística. Para ativar somente a re
 
 ```powershell
 $env:ENABLE_LLM_JUSTIFICATION="true"
-$env:OPENAI_API_KEY="sua-chave"
-$env:OPENAI_MODEL="gpt-5-mini"
+$env:LLM_PROVIDER="gemini"
+$env:GEMINI_API_KEY="sua-chave"
+$env:GEMINI_MODEL="gemini-2.5-flash-lite"
 .venv\Scripts\streamlit run app.py
 ```
 
-A chamada usa a Responses API sem armazenamento da resposta (`store=false`). O LLM recebe
-apenas classe, confiança, indicador de baixa confiança, evidências permitidas e o fallback.
-Saída sem a classe, sem evidência permitida, longa demais ou sem alerta obrigatório é
-rejeitada e substituída automaticamente pela justificativa determinística.
+`gemini` é o provedor padrão por oferecer uma camada gratuita para o modelo configurado.
+Também é possível definir `LLM_PROVIDER=openai`, `OPENAI_API_KEY` e `OPENAI_MODEL`. No caso
+da OpenAI, a chamada usa a Responses API com `store=false`.
+
+Independentemente do provedor, o LLM recebe apenas classe, confiança, indicador de baixa
+confiança, evidências permitidas e o fallback. Saída sem a classe, sem evidência permitida,
+longa demais ou sem alerta obrigatório é rejeitada e substituída automaticamente pela
+justificativa determinística.
+
+> Atenção: os termos vigentes do Gemini gratuito permitem que conteúdo enviado e respostas
+> sejam usados para melhorar produtos Google e possam passar por revisão humana. Não envie
+> tickets sensíveis, confidenciais ou com dados pessoais nessa modalidade. Para produção,
+> utilize um serviço com garantias de privacidade adequadas.
 
 ## Docker
 
@@ -191,9 +201,10 @@ docker compose up --build
 ```
 
 A aplicação ficará disponível em `http://localhost:8501`. Para ativar o LLM no Compose,
-defina `ENABLE_LLM_JUSTIFICATION=true`, `OPENAI_API_KEY` e, opcionalmente, `OPENAI_MODEL`
-no ambiente antes do comando. A chave não é copiada para a imagem; ela é passada somente em
-tempo de execução.
+defina `ENABLE_LLM_JUSTIFICATION=true`, `LLM_PROVIDER=gemini` e `GEMINI_API_KEY` no ambiente
+antes do comando. `GEMINI_MODEL` é opcional. As mesmas variáveis `OPENAI_*` continuam
+disponíveis quando `LLM_PROVIDER=openai`. Nenhuma chave é copiada para a imagem; elas são
+passadas somente em tempo de execução.
 
 ## Reprodução em ambiente limpo
 

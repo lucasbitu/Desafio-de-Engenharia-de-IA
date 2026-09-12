@@ -10,7 +10,7 @@ from pydantic import ValidationError
 
 from ticket_classifier.config import DEFAULT_DEVELOPMENT_MODEL_PATH
 from ticket_classifier.delivery import DeliveryPredictionService
-from ticket_classifier.llm_justification import OpenAIJustificationRewriter
+from ticket_classifier.llm_justification import rewriter_from_environment
 
 
 MODEL_PATH = DEFAULT_DEVELOPMENT_MODEL_PATH
@@ -22,7 +22,7 @@ def load_service(model_path: Path) -> DeliveryPredictionService:
     rewriter = None
     if os.environ.get("ENABLE_LLM_JUSTIFICATION", "").casefold() in {"1", "true", "yes"}:
         try:
-            rewriter = OpenAIJustificationRewriter.from_environment()
+            rewriter = rewriter_from_environment()
         except Exception:
             rewriter = None
     return DeliveryPredictionService.from_model_path(
