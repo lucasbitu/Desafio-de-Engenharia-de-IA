@@ -268,7 +268,7 @@ py -3 -m venv .venv-part1-validation
 .venv-part1-validation\Scripts\python -m pip install -r requirements.txt
 .venv-part1-validation\Scripts\python -m pip install --no-deps -e .
 .venv-part1-validation\Scripts\python -m pip check
-.venv-part1-validation\Scripts\ticket-train
+.venv-part1-validation\Scripts\ticket-train --output-dir tmp\part1-venv-artifacts
 .venv-part1-validation\Scripts\python -m unittest discover -s tests -v
 .venv-part1-validation\Scripts\streamlit run app.py --server.address=127.0.0.1 --server.port=8502 --server.headless=true --browser.gatherUsageStats=false
 Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8502/_stcore/health
