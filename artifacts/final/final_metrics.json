@@ -1,0 +1,78 @@
+{
+  "sample_size": 200,
+  "accuracy": 0.905,
+  "macro_f1": 0.9134885317002196,
+  "weighted_f1": 0.9060981653376357,
+  "classification_report": {
+    "Access": {
+      "precision": 0.9310344827586207,
+      "recall": 0.9,
+      "f1-score": 0.9152542372881356,
+      "support": 30.0
+    },
+    "Administrative rights": {
+      "precision": 1.0,
+      "recall": 0.8571428571428571,
+      "f1-score": 0.9230769230769231,
+      "support": 7.0
+    },
+    "HR Support": {
+      "precision": 0.9302325581395349,
+      "recall": 0.8695652173913043,
+      "f1-score": 0.898876404494382,
+      "support": 46.0
+    },
+    "Hardware": {
+      "precision": 0.9137931034482759,
+      "recall": 0.9298245614035088,
+      "f1-score": 0.9217391304347826,
+      "support": 57.0
+    },
+    "Internal Project": {
+      "precision": 1.0,
+      "recall": 0.8888888888888888,
+      "f1-score": 0.9411764705882353,
+      "support": 9.0
+    },
+    "Miscellaneous": {
+      "precision": 0.7714285714285715,
+      "recall": 0.9310344827586207,
+      "f1-score": 0.84375,
+      "support": 29.0
+    },
+    "Purchase": {
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1-score": 0.9473684210526315,
+      "support": 10.0
+    },
+    "Storage": {
+      "precision": 0.9166666666666666,
+      "recall": 0.9166666666666666,
+      "f1-score": 0.9166666666666666,
+      "support": 12.0
+    },
+    "accuracy": 0.905,
+    "macro avg": {
+      "precision": 0.9328944228052087,
+      "recall": 0.8991403342814808,
+      "f1-score": 0.9134885317002196,
+      "support": 200.0
+    },
+    "weighted avg": {
+      "precision": 0.9108968381257876,
+      "recall": 0.905,
+      "f1-score": 0.9060981653376357,
+      "support": 200.0
+    }
+  },
+  "low_confidence_policy": {
+    "threshold": 0.6,
+    "flagged": 49,
+    "flagged_rate": 0.245,
+    "errors_captured": 16,
+    "error_capture_rate": 0.8421052631578947,
+    "accuracy_below": 0.673469387755102,
+    "accuracy_at_or_above": 0.9801324503311258
+  }
+}

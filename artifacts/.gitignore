@@ -1,2 +1,8 @@
 *
 !.gitignore
+!final/
+final/*
+!final/final_metrics.json
+!final/final_predictions.csv
+!final/confusion_matrix.csv
+!final/run_metadata.json

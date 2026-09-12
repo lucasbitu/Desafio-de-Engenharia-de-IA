@@ -1,0 +1,59 @@
+{
+  "stage": "final",
+  "experiment": "E04_tfidf_unigram_logreg_moderate_weights",
+  "final_test_accessed": true,
+  "accessed_at_utc": "2026-09-12T02:54:53.561503+00:00",
+  "single_use_output_guard": true,
+  "release_commit": "0a15f4f2f49ff314ae88d4b4e8141f00faa35639",
+  "random_seed": 42,
+  "train": {
+    "rows": 38109,
+    "sha256": "62DA11CE58FA9EAF6C3AC04A77BE24FC0C66A97864829D68CA98FDBE6FDDF894"
+  },
+  "validation": {
+    "rows": 9528,
+    "sha256": "4EEA86B63A3E3D7186C6F52C3FFF41D6D8E266679D7B9496428E3E2971366DB0"
+  },
+  "test": {
+    "rows": 200,
+    "sha256": "E857B8873DE34B47EC39360F82BD25A04497A811D9D985E835F9D1EEF27F5B6D"
+  },
+  "combined_training_rows": 47637,
+  "classes": [
+    "Access",
+    "Administrative rights",
+    "HR Support",
+    "Hardware",
+    "Internal Project",
+    "Miscellaneous",
+    "Purchase",
+    "Storage"
+  ],
+  "vocabulary_size": 9149,
+  "class_weight": {
+    "Access": 0.9772543014804927,
+    "Administrative rights": 1.9660421867036884,
+    "HR Support": 0.7895670137094921,
+    "Hardware": 0.706893430917426,
+    "Internal Project": 1.7920188058982598,
+    "Miscellaneous": 0.9816919768732455,
+    "Purchase": 1.6616766279137472,
+    "Storage": 1.5654392649960656
+  },
+  "model_sha256": "6C08847BCC6DF8BEA0BE3C04B20D49DEA76E6C8F5814AF6727D157D54FFD7C84",
+  "roundtrip_predictions_identical": true,
+  "metrics": {
+    "accuracy": 0.905,
+    "macro_f1": 0.9134885317002196,
+    "weighted_f1": 0.9060981653376357
+  },
+  "environment": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.4.3",
+    "pandas": "2.3.3",
+    "pydantic": "2.11.7",
+    "scikit_learn": "1.8.0",
+    "joblib": "1.5.3"
+  }
+}
