@@ -18,7 +18,8 @@ Concluído:
 - treinamento oficial da fase de desenvolvimento;
 - testes automatizados do núcleo;
 - interface interativa Streamlit;
-- reprodução aprovada em ambiente virtual limpo.
+- reprodução aprovada em ambiente virtual limpo;
+- executor final isolado validado somente com dados sintéticos.
 
 Ainda não implementado:
 
@@ -164,6 +165,24 @@ O arquivo `joblib` reproduzido não teve identidade binária com o artefato ante
 de parâmetros, previsões, probabilidades e métricas equivalentes. Por isso, cada artefato de
 release recebe seu próprio hash; equivalência funcional é validada separadamente.
 
+## Avaliação final isolada
+
+O comando abaixo é deliberadamente separado do fluxo comum e não deve ser executado durante
+desenvolvimento:
+
+```powershell
+.venv\Scripts\ticket-final-evaluate --confirm I_UNDERSTAND_THIS_OPENS_THE_FINAL_TEST
+```
+
+Antes de executá-lo, deve existir um release candidate identificado, com Git limpo, 43 testes
+aprovados e autorização explícita para abrir os 200 tickets. O executor valida hashes,
+contagens, classes e ausência de sobreposição; treina o E04 em treino mais validação; recalcula
+os pesos moderados; e grava modelo, métricas, previsões, matriz de confusão e metadados em
+`artifacts/final/`.
+
+O diretório final não pode existir previamente e nunca é sobrescrito. Resultados observados
+nesta execução não podem retroalimentar modelo, features, pesos, limiar ou justificativa.
+
 ## Decisões arquiteturais
 
 - [ADR-001](docs/decisions/ADR-001-classification-methodology.md): metodologia inicial.
@@ -172,6 +191,7 @@ release recebe seu próprio hash; equivalência funcional é validada separadame
 - [ADR-004](docs/decisions/ADR-004-development-baseline-and-release-gates.md): baseline e gates de release.
 - [ADR-005](docs/decisions/ADR-005-thin-streamlit-interface.md): interface Streamlit fina.
 - [ADR-006](docs/decisions/ADR-006-clean-environment-reproduction.md): reprodução em ambiente limpo.
+- [ADR-007](docs/decisions/ADR-007-isolated-final-evaluator.md): executor final isolado.
 
 ## Limitações conhecidas
 
@@ -184,5 +204,5 @@ release recebe seu próprio hash; equivalência funcional é validada separadame
 
 ## Próxima etapa
 
-Projetar e testar o executor final isolado sem executá-lo contra os 200 tickets. O teste final
-continuará fechado até o congelamento completo do release candidate.
+Revisar e testar o executor final isolado, documentar seu comando e congelar um release
+candidate. O teste final continuará fechado até uma autorização separada para a execução única.
