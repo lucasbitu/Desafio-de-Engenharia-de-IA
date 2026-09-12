@@ -23,9 +23,9 @@ Concluído:
 
 Ainda não implementado:
 
-- treinamento final em treino mais validação;
-- avaliação única dos 200 tickets finais;
-- relatório final de teste.
+- autorização explícita para abrir o teste final;
+- execução única do treinamento final em treino mais validação e da avaliação dos 200 tickets;
+- revisão e publicação do relatório final de teste.
 
 O `test.csv` permanece fora dos módulos de desenvolvimento e só poderá ser acessado depois do congelamento do release candidate.
 
@@ -156,10 +156,10 @@ datasets, não calcula métricas e não conhece o caminho do teste final.
 
 ## Reprodução em ambiente limpo
 
-O commit de preparação do release foi validado em uma cópia local limpa com um ambiente
-virtual novo. A instalação declarada, o treinamento de desenvolvimento, o `pip check`, os
-38 testes e o smoke test do Streamlit foram aprovados. Accuracy, macro-F1, weighted-F1,
-vocabulário, classes e pesos foram reproduzidos exatamente.
+O candidato de entrega foi auditado em uma cópia local limpa com um ambiente virtual novo.
+A instalação declarada, o treinamento de desenvolvimento, o `pip check`, os 43 testes e o
+smoke test do Streamlit foram aprovados. Accuracy, macro-F1, weighted-F1, vocabulário,
+classes e pesos foram reproduzidos exatamente.
 
 O arquivo `joblib` reproduzido não teve identidade binária com o artefato anterior, apesar
 de parâmetros, previsões, probabilidades e métricas equivalentes. Por isso, cada artefato de
@@ -192,6 +192,7 @@ nesta execução não podem retroalimentar modelo, features, pesos, limiar ou ju
 - [ADR-005](docs/decisions/ADR-005-thin-streamlit-interface.md): interface Streamlit fina.
 - [ADR-006](docs/decisions/ADR-006-clean-environment-reproduction.md): reprodução em ambiente limpo.
 - [ADR-007](docs/decisions/ADR-007-isolated-final-evaluator.md): executor final isolado.
+- [ADR-008](docs/decisions/ADR-008-release-candidate-audit.md): auditoria do candidato de entrega.
 
 ## Limitações conhecidas
 
@@ -204,5 +205,7 @@ nesta execução não podem retroalimentar modelo, features, pesos, limiar ou ju
 
 ## Próxima etapa
 
-Revisar e testar o executor final isolado, documentar seu comando e congelar um release
-candidate. O teste final continuará fechado até uma autorização separada para a execução única.
+Obter autorização explícita e separada para executar uma única vez o avaliador final no
+release candidate congelado. Depois da execução, revisar os artefatos em `artifacts/final/`
+e incorporar ao relatório apenas os resultados observados, sem novos ajustes de modelo,
+limiar ou justificativa.
