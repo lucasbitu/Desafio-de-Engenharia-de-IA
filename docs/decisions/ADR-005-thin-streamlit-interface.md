@@ -70,10 +70,10 @@ O diagnóstico opcional pode exibir confiança estimada, indicação de baixa co
 
 ## Dependência
 
-Streamlit será tratado como dependência específica da apresentação e está fixado em `requirements-interface.txt`.
+Streamlit será tratado como dependência opcional da apresentação e está centralizado no extra `interface` de `pyproject.toml`.
 
 ```powershell
-.venv\Scripts\python -m pip install -r requirements-interface.txt
+.venv\Scripts\python -m pip install -e ".[interface]"
 .venv\Scripts\python -m streamlit run app.py
 ```
 

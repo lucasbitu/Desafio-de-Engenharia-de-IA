@@ -16,6 +16,11 @@ dependencies = [
   "scikit-learn==1.8.0",
 ]
 
+[project.optional-dependencies]
+interface = [
+  "streamlit==1.49.1",
+]
+
 [project.scripts]
 ticket-train = "ticket_classifier.training:main"
 
