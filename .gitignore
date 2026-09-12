@@ -4,3 +4,7 @@ __pycache__/
 *.egg-info/
 .env
 /tmp/
+/archive/local-runtime/
+/outputs/development/
+/outputs/final/model.joblib
+/experiments/classification/*/outputs/model.joblib

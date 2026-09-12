@@ -51,11 +51,11 @@ Streamlit permite uma aplicação local leve com pouco código de apresentação
 
 ## Decisão
 
-Adotar uma aplicação Streamlit no arquivo `app.py`, na raiz do repositório.
+Adotar uma aplicação Streamlit no arquivo `interface/app.py`.
 
 A aplicação deverá:
 
-1. carregar `artifacts/development/model.joblib`;
+1. carregar `outputs/development/model.joblib`;
 2. construir o serviço por `DeliveryPredictionService.from_model_path`;
 3. coletar o texto do ticket;
 4. tratar entrada vazia antes da inferência;
@@ -74,7 +74,7 @@ Streamlit será tratado como dependência opcional da apresentação e está cen
 
 ```powershell
 .venv\Scripts\python -m pip install -e ".[interface]"
-.venv\Scripts\python -m streamlit run app.py
+.venv\Scripts\python -m streamlit run interface/app.py
 ```
 
 Como o modelo não é versionado, uma instalação limpa deve executar `ticket-train` antes de iniciar a interface.

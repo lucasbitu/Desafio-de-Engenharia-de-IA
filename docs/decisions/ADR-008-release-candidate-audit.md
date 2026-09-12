@@ -1,5 +1,8 @@
 # ADR-008 — Auditoria e congelamento do candidato de entrega
 
+> Contexto histórico: este ADR registra o congelamento imediatamente anterior à avaliação final, que foi posteriormente executada e encerrada.
+
+
 - Status: aceito
 - Data: 2026-09-11
 - Commit auditado: `f85c404d112717c125114b6fbdd604c4e20748eb`
@@ -27,7 +30,7 @@ Foram adotados os seguintes gates:
 6. executar a suíte automatizada completa;
 7. iniciar a interface e verificar o endpoint de saúde;
 8. auditar estaticamente as referências ao teste final;
-9. confirmar a ausência de `artifacts/final/`.
+9. confirmar a ausência de `outputs/final/`.
 
 ## Evidências
 
@@ -45,7 +48,7 @@ Foram adotados os seguintes gates:
 - artefatos finais: ausentes.
 
 A varredura estática confirmou que o caminho e o hash do teste final existem no código de
-execução apenas em `ticket_classifier.final_evaluation`. As demais ocorrências são testes de
+execução apenas em `ticket_classifier.metrics.final_evaluation`. As demais ocorrências são testes de
 isolamento, documentação e metadados do split. Treino, inferência e interface não importam o
 módulo de avaliação final.
 

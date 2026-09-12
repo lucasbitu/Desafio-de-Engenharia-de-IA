@@ -10,10 +10,10 @@ from unittest.mock import patch
 from streamlit.testing.v1 import AppTest
 
 from ticket_classifier.config import DEFAULT_DEVELOPMENT_MODEL_PATH, PROJECT_ROOT
-from ticket_classifier.delivery import DeliveryPredictionService
+from ticket_classifier.flow.delivery import DeliveryPredictionService
 
 
-APP_PATH = PROJECT_ROOT / "app.py"
+APP_PATH = PROJECT_ROOT / "interface" / "app.py"
 MODEL_PATH = DEFAULT_DEVELOPMENT_MODEL_PATH
 
 
@@ -83,7 +83,7 @@ class StreamlitInterfaceTest(unittest.TestCase):
         forbidden = (
             "test.csv",
             "read_csv",
-            "data_split",
+            "data/splits",
             "default_test",
             "llm_justification",
             "llm_provider",

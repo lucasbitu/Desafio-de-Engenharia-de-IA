@@ -1,5 +1,8 @@
 # ADR-007: Executor final isolado
 
+> Contexto histórico: este ADR registra o gate anterior à execução real. A avaliação final foi posteriormente autorizada e concluída; consulte `docs/reports/final-evaluation.md`.
+
+
 ## Status
 
 Aceita para testes sintéticos. Execução real ainda não autorizada.
@@ -15,7 +18,7 @@ O ADR-004 exige um avaliador final separado, explícito e de uso único antes da
 
 ## Decisão
 
-Implementar `ticket_classifier.final_evaluation` como único fluxo autorizado a conhecer a
+Implementar `ticket_classifier.metrics.final_evaluation` como único fluxo autorizado a conhecer a
 partição final. O módulo não é importado por treinamento de desenvolvimento, inferência ou
 Streamlit e não realiza leitura ao ser importado.
 

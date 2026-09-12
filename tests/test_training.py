@@ -7,8 +7,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from ticket_classifier.delivery import DeliveryPredictionService
-from ticket_classifier.training import OUTPUT_FILES, train_and_validate_development
+from ticket_classifier.flow.delivery import DeliveryPredictionService
+from ticket_classifier.flow.training import OUTPUT_FILES, train_and_validate_development
 
 
 class DevelopmentTrainingTest(unittest.TestCase):

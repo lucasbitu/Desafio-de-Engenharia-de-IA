@@ -1,9 +1,9 @@
 """Public API for the QuantumRise ticket classifier."""
 
-from .confidence import LOW_CONFIDENCE_THRESHOLD, is_low_confidence
-from .delivery import DeliveryPredictionService, PredictionDiagnostics
-from .inference import TicketClassifier
-from .model import build_e04_pipeline, moderate_class_weights
+from .metrics.confidence import LOW_CONFIDENCE_THRESHOLD, is_low_confidence
+from .flow.delivery import DeliveryPredictionService, PredictionDiagnostics
+from .classification.inference import TicketClassifier
+from .classification.model import build_e04_pipeline, moderate_class_weights
 from .schemas import ClassificationResult, Evidence, PredictionOutput, TicketInput
 
 __all__ = [

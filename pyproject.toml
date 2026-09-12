@@ -26,8 +26,8 @@ llm = [
 ]
 
 [project.scripts]
-ticket-train = "ticket_classifier.training:main"
-ticket-final-evaluate = "ticket_classifier.final_evaluation:main"
+ticket-train = "ticket_classifier.flow.training:main"
+ticket-final-evaluate = "ticket_classifier.metrics.final_evaluation:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,4 +1,4 @@
-"""Canonical configuration frozen by ADR-002."""
+"""Shared paths and frozen model constants for every stage of the pipeline."""
 
 import os
 from pathlib import Path
@@ -26,17 +26,17 @@ EXPECTED_VALIDATION_ROWS = 9_528
 EXPECTED_TRAIN_SHA256 = "62DA11CE58FA9EAF6C3AC04A77BE24FC0C66A97864829D68CA98FDBE6FDDF894"
 EXPECTED_VALIDATION_SHA256 = "4EEA86B63A3E3D7186C6F52C3FFF41D6D8E266679D7B9496428E3E2971366DB0"
 
-DEFAULT_TRAIN_PATH = PROJECT_ROOT / "data_split" / "outputs" / "train.csv"
-DEFAULT_VALIDATION_PATH = PROJECT_ROOT / "data_split" / "outputs" / "validation.csv"
-DEFAULT_DEVELOPMENT_ARTIFACT_DIR = PROJECT_ROOT / "artifacts" / "development"
+DEFAULT_TRAIN_PATH = PROJECT_ROOT / "data" / "splits" / "train.csv"
+DEFAULT_VALIDATION_PATH = PROJECT_ROOT / "data" / "splits" / "validation.csv"
+DEFAULT_DEVELOPMENT_ARTIFACT_DIR = PROJECT_ROOT / "outputs" / "development"
 DEFAULT_DEVELOPMENT_MODEL_PATH = DEFAULT_DEVELOPMENT_ARTIFACT_DIR / "model.joblib"
 DEFAULT_DEVELOPMENT_PREDICTIONS_PATH = (
     DEFAULT_DEVELOPMENT_ARTIFACT_DIR / "validation_predictions.csv"
 )
 LEGACY_E04_MODEL_PATH = (
     PROJECT_ROOT
-    / "modeling"
     / "experiments"
+    / "classification"
     / "e04_moderate_weights"
     / "outputs"
     / "model.joblib"

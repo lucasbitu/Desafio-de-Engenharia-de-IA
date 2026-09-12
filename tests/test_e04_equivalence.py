@@ -25,7 +25,7 @@ from ticket_classifier.config import (
     DEFAULT_DEVELOPMENT_MODEL_PATH,
     TEXT_COLUMN,
 )
-from ticket_classifier.model import build_e04_pipeline, moderate_class_weights
+from ticket_classifier.classification.model import build_e04_pipeline, moderate_class_weights
 
 
 def sha256_file(path: Path) -> str:

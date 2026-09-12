@@ -1,5 +1,8 @@
 # ADR-009 — Reescrita generativa opcional sem framework de grafo
 
+> Contexto histórico: o protótipo foi implementado, mas retirado do caminho oficial após a avaliação descrita em `docs/experiments/llm-justification.md`.
+
+
 - Status: aceito
 - Data: 2026-09-12
 - Contexto temporal: decisão posterior à avaliação final

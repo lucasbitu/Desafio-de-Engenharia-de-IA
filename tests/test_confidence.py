@@ -6,7 +6,7 @@ import unittest
 
 import pandas as pd
 
-from ticket_classifier.confidence import (
+from ticket_classifier.metrics.confidence import (
     LOW_CONFIDENCE_THRESHOLD,
     evaluate_threshold,
     is_low_confidence,
@@ -16,7 +16,7 @@ from ticket_classifier.config import (
     DEFAULT_DEVELOPMENT_MODEL_PATH,
     DEFAULT_DEVELOPMENT_PREDICTIONS_PATH,
 )
-from ticket_classifier.delivery import DeliveryPredictionService
+from ticket_classifier.flow.delivery import DeliveryPredictionService
 
 VALIDATION_PREDICTIONS = DEFAULT_DEVELOPMENT_PREDICTIONS_PATH
 

@@ -8,7 +8,7 @@ import numpy as np
 from pydantic import ValidationError
 
 from ticket_classifier.config import DEFAULT_DEVELOPMENT_MODEL_PATH
-from ticket_classifier.inference import TicketClassifier
+from ticket_classifier.classification.inference import TicketClassifier
 from ticket_classifier.schemas import PredictionOutput, TicketInput
 
 

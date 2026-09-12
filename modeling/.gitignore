@@ -1,2 +1,0 @@
-experiments/*/outputs/*.joblib
-experiments/*/outputs/validation_predictions.csv

@@ -183,14 +183,14 @@ A baseline foi verificada com **33 testes automatizados aprovados**, além da co
 
 As responsabilidades permanecem separadas:
 
-- `model.py`: única fábrica autorizada do E04;
-- `schemas.py`: validação das entradas e dos contratos;
-- `inference.py`: carregamento do artefato, predição, confiança e evidências;
-- `justification.py`: geração determinística das justificativas;
-- `confidence.py`: política e avaliação do limiar;
-- `delivery.py`: composição do resultado interno e da resposta pública;
-- `prediction.py`: alias de compatibilidade da API anterior;
-- `training.py`: treinamento reproduzível e geração de artefatos de desenvolvimento.
+- `src/ticket_classifier/classification/model.py`: única fábrica autorizada do E04;
+- `src/ticket_classifier/schemas.py`: validação das entradas e dos contratos;
+- `src/ticket_classifier/classification/inference.py`: carregamento do artefato, predição, confiança e evidências;
+- `src/ticket_classifier/justification/deterministic.py`: geração determinística das justificativas;
+- `src/ticket_classifier/metrics/confidence.py`: política e avaliação do limiar;
+- `src/ticket_classifier/flow/delivery.py`: composição do resultado interno e da resposta pública;
+- `src/ticket_classifier/flow/prediction.py`: alias de compatibilidade da API anterior;
+- `src/ticket_classifier/flow/training.py`: treinamento reproduzível e geração de artefatos de desenvolvimento.
 
 Essa divisão evita que a futura interface contenha regras de negócio ou replique o pipeline. A interface deve apenas coletar a entrada, chamar o serviço de entrega e apresentar o resultado.
 
@@ -299,9 +299,9 @@ Uma reabertura deve gerar novo ADR ou alterar explicitamente o status dos ADRs a
 - `docs/decisions/ADR-003-low-confidence-policy.md`
 - `src/ticket_classifier/`
 - `tests/`
-- `artifacts/development/run_metadata.json`
-- `artifacts/development/validation_metrics.json`
-- `artifacts/development/validation_predictions.csv`
+- `outputs/development/run_metadata.json`
+- `outputs/development/validation_metrics.json`
+- `outputs/development/validation_predictions.csv`
 
 ## Resultado
 

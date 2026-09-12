@@ -3,8 +3,8 @@
 __pycache__
 *.py[cod]
 *.egg-info
-artifacts/development
-artifacts/final
-data_split/outputs/test.csv
-modeling/experiments/*/outputs/model.joblib
-modeling/experiments/*/outputs/validation_predictions.csv
+outputs/development
+outputs/final
+data/splits/test.csv
+experiments/classification/*/outputs/model.joblib
+experiments/classification/*/outputs/validation_predictions.csv

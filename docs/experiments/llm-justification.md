@@ -14,6 +14,6 @@ Também foram simuladas chave ausente, API indisponível e resposta inválida. N
 
 ## Decisão
 
-Não há evidência de ganho qualitativo que justifique custo, latência, indisponibilidade e exposição de dados a um serviço externo. O protótipo permanece em `src/ticket_classifier/llm_justification.py`, seus testes permanecem em `tests/test_llm_justification.py` e suas dependências podem ser instaladas separadamente com `pip install -e ".[llm]"`. Isso não ativa a funcionalidade na aplicação oficial.
+Não há evidência de ganho qualitativo que justifique custo, latência, indisponibilidade e exposição de dados a um serviço externo. O protótipo permanece em `src/ticket_classifier/justification/llm_optional.py`, seus testes permanecem em `tests/test_llm_justification.py` e suas dependências podem ser instaladas separadamente com `pip install -e ".[llm]"`. Isso não ativa a funcionalidade na aplicação oficial.
 
 Uma futura reavaliação deve primeiro atualizar modelo, timeout e API do provedor; depois executar avaliação humana cega sobre os 200 tickets, medir taxa de falha, latência e custo, e revisar requisitos de privacidade. Somente um ganho consistente justificaria reintegrar essa camada.

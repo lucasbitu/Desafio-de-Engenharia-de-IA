@@ -1,317 +1,207 @@
 # QuantumRise Ticket Classifier
 
-Classificador explicável de chamados de TI desenvolvido para o desafio de Engenharia de IA da QuantumRise. O núcleo recebe o texto de um ticket, prevê uma das oito classes e produz uma justificativa determinística baseada nas features que contribuíram para a decisão.
+Classificador explicável de chamados de TI desenvolvido para o QuantumRise AI Engineering Challenge. O sistema recebe o texto de um ticket, prevê uma das oito classes do dataset e retorna uma justificativa curta baseada nos sinais utilizados pelo próprio modelo.
 
-## Estado do projeto
+## Objetivo
 
-Concluído:
+Classificar tickets de suporte de TI em uma das oito categorias exigidas pelo desafio e explicar cada decisão com evidências do próprio texto, preservando reprodutibilidade, rastreabilidade e execução local.
 
-- análise exploratória reproduzível;
-- divisão congelada em treino, validação e 200 tickets de teste final;
-- comparação dos experimentos E00 a E04;
-- seleção do E04 por macro-F1 de validação;
-- pipeline reutilizável em `src/`;
-- contratos validados de entrada e saída;
-- evidência local por `TF-IDF x coeficiente`;
-- justificativa determinística;
-- política de baixa confiança selecionada somente na validação;
-- treinamento oficial da fase de desenvolvimento;
-- testes automatizados do núcleo;
-- interface interativa Streamlit;
-- reprodução aprovada em ambiente virtual limpo;
-- executor final isolado validado com dados sintéticos;
-- release candidate `release-candidate-v1` auditado e congelado;
-- avaliação única dos 200 tickets finais concluída;
-- relatório final de teste publicado.
+## Stack
 
-O teste final foi aberto uma única vez depois do congelamento do release candidate. Seus
-resultados não foram usados para alterar o modelo ou qualquer decisão de desenvolvimento.
+Python 3.11, pandas e scikit-learn para preparação e modelagem; Pydantic para validar a saída; Joblib para persistir o pipeline; Streamlit para o teste interativo; `unittest` para os testes; e Docker para a execução reproduzível.
 
-## Arquitetura
+## Visão geral
 
 ```text
 Ticket
-  -> validação e normalização mínima
-  -> TF-IDF de unigramas
-  -> Logistic Regression com pesos moderados
-  -> classe e confiança estimada
-  -> contribuições locais positivas
-  -> política de baixa confiança
-  -> justificativa determinística baseada nas evidências
-  -> JSON {"class": "...", "justification": "..."}
+  → validação e normalização mínima
+  → vetorização TF-IDF
+  → Logistic Regression
+  → classe e confiança estimada
+  → extração das contribuições locais
+  → justificativa determinística
+  → JSON final
 ```
 
-O caminho oficial é inteiramente local e determinístico. A interface não carrega SDKs,
-credenciais ou adaptadores de LLM.
+O caminho oficial funciona localmente e não depende de LLM, API externa ou credenciais.
 
-## Modelo selecionado
+## Entrada e saída
 
-O E04 usa:
+Entrada: texto de um ticket.
 
-- TF-IDF de palavras e unigramas;
-- `min_df=2`;
-- frequência sublinear;
-- norma L2;
-- `float64`;
-- Logistic Regression multiclasse;
-- `C=1.0`;
-- solver `lbfgs`;
-- `max_iter=1000`;
-- seed 42;
-- pesos `sqrt(N / (K * n_k))`, normalizados para peso médio por amostra igual a 1.
+Saída pública:
 
-Na validação congelada, o E04 obteve accuracy 0,8572 e macro-F1 0,8617.
-
-No teste final congelado de 200 tickets, após treinamento em treino mais validação, obteve
-accuracy 0,9050, macro-F1 0,9135 e weighted-F1 0,9061. Consulte o
-[relatório final](docs/final-evaluation-report.md).
-
-## Por que esta abordagem
-
-O dataset já oferece dezenas de milhares de tickets rotulados em oito classes fixas. Por
-isso, TF-IDF com Logistic Regression aproveita diretamente a supervisão disponível, treina
-rápido e funciona localmente, sem custo, latência ou dependência de uma API de LLM. O E04
-foi escolhido por apresentar o melhor macro-F1 de validação entre os experimentos, mantendo
-um fluxo simples, reproduzível e explicável por contribuições locais das features.
-
-## Principais trade-offs
-
-- Unigramas produziram métricas melhores e um vocabulário muito menor que bigramas, mas
-  capturam menos contexto de frases completas.
-- Pesos moderados melhoraram o equilíbrio entre classes minoritárias e frequentes, aceitando
-  pequenas perdas pontuais em algumas classes para obter o melhor macro-F1 agregado.
-- Justificativas determinísticas são fiéis ao classificador, rápidas e independentes de
-  serviços externos, mas podem soar menos naturais. Um experimento manual com Gemini não
-  mostrou ganho perceptível e, por isso, não integra o caminho oficial.
-- A probabilidade da Logistic Regression é útil para triagem de baixa confiança, mas não foi
-  formalmente calibrada e não deve ser interpretada como garantia de acerto.
-
-## Baixa confiança
-
-Uma previsão é sinalizada quando:
-
-```text
-confidence < 0.60
+```json
+{
+  "class": "Access",
+  "justification": "The terms 'password' and 'login' support the Access classification."
+}
 ```
 
-O limiar é o menor candidato que capturou pelo menos 70% dos erros de validação sem sinalizar mais de 30% dos tickets. Ele sinalizou 25,71% da validação e capturou 70,54% dos erros. O alerta muda somente a redação da justificativa, nunca a classe.
+A aplicação também pode mostrar confiança e evidências para diagnóstico, sem alterar o contrato exigido pelo desafio.
 
-## Instalação
+## Como executar
+
+### Docker
+
+```powershell
+docker compose up --build
+```
+
+Abra `http://localhost:8501`.
+
+### Ambiente virtual
 
 Requer Python 3.11, 3.12 ou 3.13.
 
 ```powershell
 py -3 -m venv .venv
 .venv\Scripts\python -m pip install --upgrade pip
-.venv\Scripts\python -m pip install -r requirements.txt
-.venv\Scripts\python -m pip install --no-deps -e .
-```
-
-As versões das dependências estão fixadas em `requirements.txt` e espelham as versões
-declaradas em `pyproject.toml`. O segundo comando instala somente o pacote local e seus
-atalhos de linha de comando, sem recalcular as dependências já instaladas.
-
-Para instalar também a interface:
-
-```powershell
 .venv\Scripts\python -m pip install -e ".[interface]"
-```
-
-Os SDKs de LLM não fazem parte de `requirements.txt` nem da aplicação oficial. Para reproduzir
-somente o protótipo histórico descrito em `docs/experiments/llm-justification.md`:
-
-```powershell
-.venv\Scripts\python -m pip install -e ".[llm]"
-```
-
-## Dados congelados
-
-O treinamento de desenvolvimento espera:
-
-```text
-data_split/outputs/train.csv
-data_split/outputs/validation.csv
-```
-
-O comando valida quantidades e hashes antes de carregar os registros. Arquivos diferentes são recusados.
-
-## Treinamento e validação de desenvolvimento
-
-```powershell
 .venv\Scripts\ticket-train
+.venv\Scripts\streamlit run interface/app.py
 ```
 
-Alternativamente:
-
-```powershell
-.venv\Scripts\python -m ticket_classifier.training
-```
-
-O comando usa somente treino e validação e gera, em `artifacts/development/`:
-
-- `model.joblib`;
-- `validation_metrics.json`;
-- `validation_predictions.csv`;
-- `run_metadata.json`.
-
-Por segurança, uma segunda execução recusa sobrescrever os artefatos. Use `--force` somente quando a substituição for intencional.
-
-## Testes
-
-Após instalar o pacote:
+### Testes
 
 ```powershell
 .venv\Scripts\python -m unittest discover -s tests -v
 ```
 
-Durante o desenvolvimento sem instalação:
+## Dados
 
-```powershell
-$env:PYTHONPATH="$PWD\src"
-py -3 -m unittest discover -s tests -v
-```
+O dataset possui 47.837 tickets nas colunas `Document` (texto) e `Topic_group` (rótulo). Foram encontradas oito classes: Access, Administrative rights, Hardware, HR Support, Internal Project, Miscellaneous, Purchase e Storage.
 
-Os testes pressupõem que `ticket-train` tenha gerado os artefatos oficiais em
-`artifacts/development/`. Eles não dependem dos binários históricos ignorados em
-`modeling/experiments/`.
+A distribuição é desbalanceada: `Hardware` representa 28,47% dos registros e `Administrative rights`, 3,68%. O texto aparenta ter passado por processamento anterior. Não foram encontradas duplicatas exatas ou após normalização conservadora de espaços; quase duplicatas semânticas não foram auditadas.
 
-## Interface interativa
+A EDA completa está em [`docs/reports/eda.md`](docs/reports/eda.md).
 
-Depois de executar `ticket-train`:
+## Preparação e amostragem
 
-```powershell
-.venv\Scripts\streamlit run app.py
-```
+O dataset original não foi alterado. A divisão usa seed 42 e mantém as proporções das classes:
 
-A interface reutiliza `DeliveryPredictionService`, exibe a classe e a justificativa no
-contrato público exigido e oferece diagnósticos de confiança opcionais. Ela não carrega
-datasets, não calcula métricas e não conhece o caminho do teste final.
+| Partição | Tickets | Uso |
+|---|---:|---|
+| Treino | 38.109 | ajuste do modelo durante o desenvolvimento |
+| Validação | 9.528 | comparação dos experimentos e escolha das decisões |
+| Teste final | 200 | avaliação única do candidato congelado |
 
-A interface usa exclusivamente a justificativa determinística. O protótipo de reescrita por
-LLM foi retirado do caminho principal após teste manual não demonstrar ganho de qualidade e
-registrar falhas de disponibilidade. Consulte
-[`docs/experiments/llm-justification.md`](docs/experiments/llm-justification.md) para o histórico,
-as limitações e as condições necessárias para uma futura reavaliação.
+Cada registro recebeu um identificador determinístico. Os hashes, contagens, classes e ausência de sobreposição foram validados antes do treinamento e da avaliação.
 
-## Docker
+Os splits ficam em `data/splits/`. O procedimento completo está em [`docs/reports/data-split.md`](docs/reports/data-split.md).
 
-A imagem instala as dependências, reproduz o modelo de desenvolvimento durante o build e
-inicia o Streamlit na porta 8501:
+## Metodologia de classificação
 
-```powershell
-docker compose up --build
-```
+O modelo selecionado usa TF-IDF de unigramas, frequência sublinear, Logistic Regression multiclasse, pesos moderados por classe e seed 42. Os pesos são proporcionais à raiz quadrada do desbalanceamento. Isso reduz a dominância das classes frequentes sem provocar a mudança agressiva de precisão para recall observada com pesos totalmente balanceados.
 
-A aplicação ficará disponível em `http://localhost:8501`. O contêiner oficial não instala
-SDKs de LLM e não recebe chaves de API.
+### Abordagem escolhida e por quê
 
-Para validar um build sem reaproveitar camadas anteriores:
+O dataset já contém dezenas de milhares de exemplos rotulados e somente oito classes fixas. TF-IDF com Logistic Regression usa diretamente essa supervisão, treina rapidamente, funciona localmente e permite relacionar a previsão às palavras que influenciaram o classificador.
 
-```powershell
-docker compose down --remove-orphans
-docker compose build --no-cache
-docker compose up -d
-docker compose ps
-```
+LLM, RAG e embeddings foram considerados, mas não foram adotados no caminho principal:
 
-O contêiner define `TICKET_CLASSIFIER_PROJECT_ROOT=/app`. Essa raiz explícita garante que
-os splits e artefatos sejam resolvidos dentro da aplicação mesmo quando o pacote Python é
-instalado em `site-packages`.
+- um LLM acrescentaria custo, latência, variabilidade e exposição dos tickets a um serviço externo;
+- RAG aumentaria a complexidade sem necessidade demonstrada para oito classes supervisionadas;
+- embeddings poderiam melhorar generalização semântica, mas reduziriam a transparência direta e exigiriam uma comparação adicional.
 
-## Reprodução em ambiente limpo
+## Seleção do modelo
 
-O candidato de entrega foi auditado em uma cópia local limpa com um ambiente virtual novo.
-A instalação declarada, o treinamento de desenvolvimento, o `pip check`, os 53 testes e o
-smoke test do Streamlit foram aprovados. Accuracy, macro-F1, weighted-F1, vocabulário,
-classes e pesos foram reproduzidos exatamente.
+As configurações abaixo foram comparadas exclusivamente na validação:
 
-Em 12 de setembro de 2026, os dois caminhos foram novamente reproduzidos. O Docker foi
-validado a partir de um clone limpo do `origin/main` com:
+| Configuração | Mudança principal | Accuracy | Macro-F1 |
+|---|---|---:|---:|
+| Baseline majoritário | sempre prevê a classe mais frequente | 0,2846 | 0,0554 |
+| TF-IDF unigrama | Logistic Regression sem pesos | 0,8537 | 0,8534 |
+| Pesos balanceados | compensação integral do desbalanceamento | 0,8527 | 0,8558 |
+| Unigramas e bigramas | contexto lexical adicional | 0,8479 | 0,8405 |
+| Modelo selecionado | unigramas e pesos moderados | 0,8572 | 0,8617 |
 
-```powershell
-docker compose build --no-cache
-docker compose up -d
-docker compose ps
-Invoke-WebRequest -UseBasicParsing http://localhost:8501/_stcore/health
-```
+O modelo final apresentou o melhor macro-F1 e a melhor acurácia de validação, mantendo um vocabulário muito menor que a alternativa com bigramas. Os experimentos completos estão em [`experiments/classification`](experiments/classification).
 
-O plano B foi validado em um venv temporário independente, usando nomes alternativos para
-não tocar no ambiente e nos artefatos oficiais já existentes:
+## Geração da justificativa
 
-```powershell
-py -3 -m venv .venv-part1-validation
-.venv-part1-validation\Scripts\python -m pip install --upgrade pip
-.venv-part1-validation\Scripts\python -m pip install -r requirements.txt
-.venv-part1-validation\Scripts\python -m pip install --no-deps -e .
-.venv-part1-validation\Scripts\python -m pip check
-.venv-part1-validation\Scripts\ticket-train
-.venv-part1-validation\Scripts\python -m unittest discover -s tests -v
-.venv-part1-validation\Scripts\streamlit run app.py --server.address=127.0.0.1 --server.port=8502 --server.headless=true --browser.gatherUsageStats=false
-Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8502/_stcore/health
-```
+A justificativa oficial é determinística:
 
-Ambos responderam HTTP 200 com corpo `ok`. O Docker e o venv reproduziram accuracy
-`0,8571578505457599`, macro-F1 `0,8617016202371395` e weighted-F1
-`0,8576483790122832` na validação de desenvolvimento.
+1. o texto é transformado em TF-IDF;
+2. cada feature presente é multiplicada pelo coeficiente da classe prevista;
+3. as maiores contribuições positivas e informativas são selecionadas;
+4. essas evidências formam uma justificativa de uma a três frases.
 
-O arquivo `joblib` reproduzido não teve identidade binária com o artefato anterior, apesar
-de parâmetros, previsões, probabilidades e métricas equivalentes. Por isso, cada artefato de
-release recebe seu próprio hash; equivalência funcional é validada separadamente.
+A justificativa explica os sinais usados pelo classificador. Ela não solicita a um LLM que invente uma explicação depois da previsão.
 
-## Avaliação final isolada
+Uma reescrita opcional com LLM foi testada, mas não demonstrou ganho qualitativo e introduziu falhas de disponibilidade, latência e dependência externa. Por isso, permanece apenas como experimento em [`docs/experiments/llm-justification.md`](docs/experiments/llm-justification.md).
 
-O comando abaixo é deliberadamente separado do fluxo comum e não deve ser executado durante
-desenvolvimento:
+## Baixa confiança
 
-```powershell
-.venv\Scripts\ticket-final-evaluate --confirm I_UNDERSTAND_THIS_OPENS_THE_FINAL_TEST
-```
+Previsões com confiança inferior a `0.60` são sinalizadas. O limiar foi escolhido somente na validação: sinalizou 25,71% dos tickets e capturou 70,54% dos erros.
 
-Antes de executá-lo, deve existir um release candidate identificado, com Git limpo, 53 testes
-aprovados e autorização explícita para abrir os 200 tickets. O executor valida hashes,
-contagens, classes e ausência de sobreposição; treina o E04 em treino mais validação; recalcula
-os pesos moderados; e grava modelo, métricas, previsões, matriz de confusão e metadados em
-`artifacts/final/`.
+O alerta modifica apenas a redação da justificativa. Ele nunca altera a classe prevista. A probabilidade não foi formalmente calibrada e não deve ser interpretada como garantia de acerto.
 
-O diretório final não pode existir previamente e nunca é sobrescrito. Resultados observados
-nesta execução não podem retroalimentar modelo, features, pesos, limiar ou justificativa.
+## Teste interativo
 
-## Decisões arquiteturais
+A interface Streamlit é uma camada fina sobre o mesmo serviço usado nos testes e na avaliação. Ela permite digitar um ticket, visualizar classe e justificativa, consultar confiança e evidências e inspecionar o JSON exigido. A interface não carrega datasets, calcula métricas ou acessa o teste final.
 
-- [ADR-001](docs/decisions/ADR-001-classification-methodology.md): metodologia inicial.
-- [ADR-002](docs/decisions/ADR-002-final-model-selection.md): seleção e congelamento do E04; substitui as escolhas iniciais de bigramas e balanceamento integral.
-- [ADR-003](docs/decisions/ADR-003-low-confidence-policy.md): limiar de baixa confiança.
-- [ADR-004](docs/decisions/ADR-004-development-baseline-and-release-gates.md): baseline e gates de release.
-- [ADR-005](docs/decisions/ADR-005-thin-streamlit-interface.md): interface Streamlit fina.
-- [ADR-006](docs/decisions/ADR-006-clean-environment-reproduction.md): reprodução em ambiente limpo.
-- [ADR-007](docs/decisions/ADR-007-isolated-final-evaluator.md): executor final isolado.
-- [ADR-008](docs/decisions/ADR-008-release-candidate-audit.md): auditoria do candidato de entrega.
-- [ADR-009](docs/decisions/ADR-009-optional-llm-rewriting.md): decisão histórica do protótipo de reescrita; atualmente fora do caminho oficial.
+## Métricas finais
 
-## Limitações conhecidas
+Depois do congelamento da configuração, o modelo foi retreinado com treino e validação e avaliado uma única vez nos 200 tickets finais.
 
-- o dataset aparenta ter sido previamente processado;
-- entradas brutas podem diferir da distribuição de treino;
+| Métrica | Resultado |
+|---|---:|
+| Accuracy | 0,9050 |
+| Macro-F1 | 0,9135 |
+| Weighted-F1 | 0,9061 |
+| Acertos | 181 |
+| Erros | 19 |
+
+Todas as oito classes tiveram F1 acima de `0.84`. `Miscellaneous` apresentou a menor precisão (`0.7714`), coerente com seu caráter residual e com o vocabulário compartilhado com outras classes.
+
+O limiar de baixa confiança sinalizou 49 tickets e concentrou 16 dos 19 erros. A avaliação completa está em [`docs/reports/final-evaluation.md`](docs/reports/final-evaluation.md). Os resultados auditáveis ficam em `outputs/final/`.
+
+## Principais trade-offs
+
+- Unigramas foram melhores e muito menores que bigramas, mas capturam menos contexto de frases.
+- Pesos moderados melhoraram o equilíbrio entre classes, aceitando mudanças pontuais de precisão e recall.
+- A justificativa determinística é fiel, rápida e local, mas pode soar menos natural que uma redação generativa.
+- A confiança ajuda na triagem, mas não possui calibração formal.
+- A arquitetura prioriza clareza e reprodução local em vez de componentes distribuídos ou uma API de produção.
+
+## Limitações
+
+- o dataset aparenta já ter sido processado;
+- entradas brutas reais podem diferir da distribuição de treinamento;
 - quase duplicatas semânticas não foram auditadas;
-- as probabilidades não possuem calibração formal;
-- baixa confiança representa incerteza, não erro;
-- algumas classes compartilham vocabulário e continuam ambíguas.
+- as probabilidades não foram formalmente calibradas;
+- algumas classes compartilham vocabulário;
+- tickets curtos ou ambíguos podem fornecer pouca evidência;
+- a interface foi criada para demonstração local, não para produção.
 
-## Com mais tempo
+## O que faria com mais tempo
 
-- auditar quase duplicatas semânticas antes da divisão e medir possível vazamento entre
-  treino, validação e teste;
-- realizar avaliação humana das justificativas e melhorar a seleção de evidências fracas;
-- calibrar as probabilidades em uma partição dedicada e validar o limiar de revisão humana;
-- comparar o baseline com embeddings semânticos e ensembles usando um novo conjunto de teste;
-- adicionar API, observabilidade e monitoramento de drift para uma implantação de produção.
+- auditaria quase duplicatas semânticas antes da divisão;
+- realizaria avaliação humana das justificativas;
+- calibraria as probabilidades em uma partição dedicada;
+- compararia TF-IDF com embeddings e ensembles usando um novo teste;
+- adicionaria API, observabilidade e monitoramento de drift.
 
-## Estado de entrega
+## Estrutura do projeto
 
-A implementação e a avaliação final estão concluídas. Antes do envio, resta somente revisar
-o conteúdo do repositório e preparar a apresentação da solução; o modelo está definitivamente
-congelado e não deve receber ajustes baseados no teste final.
+```text
+data/                    splits reproduzíveis
+prep/                    criação e validação dos splits
+src/ticket_classifier/
+  classification/        vetorização, modelo e inferência
+  flow/                  treinamento e entrega da previsão
+  justification/         evidências e justificativas
+  metrics/               confiança e avaliação final
+interface/               aplicação Streamlit
+experiments/             EDA e modelos testados no desenvolvimento
+outputs/                 resultados oficiais
+docs/                    decisões e relatórios detalhados
+tests/                   testes automatizados
+```
 
-A reescrita generativa e a conteinerização foram adicionadas depois da avaliação final como
-recursos de entrega. Elas não alteram o classificador congelado e não foram avaliadas nem
-ajustadas usando os 200 tickets finais.
+## Reprodutibilidade
+
+A instalação, o treinamento, os testes e o Streamlit foram validados em ambiente virtual limpo e em Docker. O fluxo verifica hashes e contagens antes de carregar os splits. Os resultados finais não foram usados para alterar modelo, features, pesos, limiar ou justificativa.
+
+As decisões arquiteturais completas permanecem em [`docs/decisions`](docs/decisions).

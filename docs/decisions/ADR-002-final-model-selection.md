@@ -231,12 +231,12 @@ Nenhuma dessas condições autoriza alterar o modelo antes da avaliação final 
 
 ## Evidências
 
-- `modeling/experiments/e01_unigram/report.md`;
-- `modeling/experiments/e01_unigram/error_analysis/report.md`;
-- `modeling/experiments/e02_balanced/report.md`;
-- `modeling/experiments/e02_balanced/error_analysis/report.md`;
-- `modeling/experiments/e03_bigrams/report.md`;
-- `modeling/experiments/e03_bigrams/decision.md`;
-- `modeling/experiments/e04_moderate_weights/report.md`;
-- `modeling/experiments/e04_moderate_weights/error_analysis/report.md`;
-- `modeling/experiments/e04_moderate_weights/decision.md`.
+- `experiments/classification/e01_unigram/report.md`;
+- `experiments/classification/e01_unigram/error_analysis/report.md`;
+- `experiments/classification/e02_balanced/report.md`;
+- `experiments/classification/e02_balanced/error_analysis/report.md`;
+- `experiments/classification/e03_bigrams/report.md`;
+- `experiments/classification/e03_bigrams/decision.md`;
+- `experiments/classification/e04_moderate_weights/report.md`;
+- `experiments/classification/e04_moderate_weights/error_analysis/report.md`;
+- `experiments/classification/e04_moderate_weights/decision.md`.

@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 from ticket_classifier.config import ID_COLUMN, LABEL_COLUMN, TEXT_COLUMN
-from ticket_classifier.final_evaluation import (
+from ticket_classifier.metrics.final_evaluation import (
     FINAL_CONFIRMATION,
     OUTPUT_FILES,
     FinalEvaluationPlan,

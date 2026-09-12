@@ -6,8 +6,8 @@ import re
 import unittest
 
 from ticket_classifier.config import DEFAULT_DEVELOPMENT_MODEL_PATH
-from ticket_classifier.justification import deterministic_justification
-from ticket_classifier.prediction import TicketPredictionService
+from ticket_classifier.justification.deterministic import deterministic_justification
+from ticket_classifier.flow.prediction import TicketPredictionService
 from ticket_classifier.schemas import ClassificationResult
 
 

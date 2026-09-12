@@ -26,7 +26,7 @@ Por isso, a arquitetura precisa equilibrar:
 
 ## Evidências da análise exploratória
 
-Esta decisão se baseia nos relatórios produzidos na [análise exploratória](../../analysis/FINAL_REPORT.md).
+Esta decisão se baseia nos relatórios produzidos na [análise exploratória](../reports/eda.md).
 
 ### Volume e supervisão
 

@@ -6,8 +6,8 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from ticket_classifier.delivery import DeliveryPredictionService
-from ticket_classifier.llm_justification import (
+from ticket_classifier.flow.delivery import DeliveryPredictionService
+from ticket_classifier.justification.llm_optional import (
     InvalidLLMJustification,
     GeminiJustificationRewriter,
     OpenAIJustificationRewriter,

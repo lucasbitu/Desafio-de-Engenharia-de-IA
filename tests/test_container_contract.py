@@ -10,7 +10,7 @@ from ticket_classifier.config import PROJECT_ROOT
 class ContainerContractTest(unittest.TestCase):
     def test_final_test_is_excluded_from_docker_context(self) -> None:
         dockerignore = (PROJECT_ROOT / ".dockerignore").read_text(encoding="utf-8")
-        self.assertIn("data_split/outputs/test.csv", dockerignore.splitlines())
+        self.assertIn("data/splits/test.csv", dockerignore.splitlines())
 
     def test_image_trains_only_from_development_partitions(self) -> None:
         dockerfile = (PROJECT_ROOT / "Dockerfile").read_text(encoding="utf-8").casefold()
@@ -22,7 +22,7 @@ class ContainerContractTest(unittest.TestCase):
     def test_production_container_has_no_llm_integration(self) -> None:
         compose = (PROJECT_ROOT / "compose.yaml").read_text(encoding="utf-8")
         dockerfile = (PROJECT_ROOT / "Dockerfile").read_text(encoding="utf-8")
-        app = (PROJECT_ROOT / "app.py").read_text(encoding="utf-8")
+        app = (PROJECT_ROOT / "interface" / "app.py").read_text(encoding="utf-8")
         for source in (compose, dockerfile, app):
             self.assertNotIn("OPENAI_API_KEY", source)
             self.assertNotIn("GEMINI_API_KEY", source)

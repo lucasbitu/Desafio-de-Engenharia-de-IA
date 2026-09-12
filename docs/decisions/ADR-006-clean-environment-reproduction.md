@@ -34,12 +34,12 @@ Nenhuma previsão ou métrica foi calculada sobre `test.csv`.
 ## Defeito encontrado
 
 Na primeira execução, quatro grupos de testes dependeram de artefatos históricos ignorados
-pelo Git em `modeling/experiments/e04_moderate_weights/outputs/`. Esses arquivos existiam no
+pelo Git em `experiments/classification/e04_moderate_weights/outputs/`. Esses arquivos existiam no
 ambiente de desenvolvimento, mas não em um clone limpo.
 
 A correção centralizou os caminhos oficiais de desenvolvimento em `config.py`. Interface e
 testes passaram a consumir exclusivamente os artefatos reproduzíveis gerados por
-`ticket-train` em `artifacts/development/`.
+`ticket-train` em `outputs/development/`.
 
 A alteração não modifica representação textual, hiperparâmetros, pesos, classes, política de
 confiança, justificativa ou partições.
