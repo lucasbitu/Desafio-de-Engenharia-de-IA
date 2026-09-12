@@ -9,7 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from .confidence import is_low_confidence
 from .inference import TicketClassifier
-from .justification import deterministic_justification, is_informative_evidence
+from .justification import deterministic_justification
 from .schemas import ClassificationResult, Evidence, PredictionOutput, TicketInput
 
 
@@ -110,8 +110,6 @@ class DeliveryPredictionService:
 def _low_confidence_justification(result: ClassificationResult) -> str:
     features: list[str] = []
     for item in result.evidence:
-        if not is_informative_evidence(item.feature):
-            continue
         if item.feature not in features:
             features.append(item.feature)
         if len(features) == 3:

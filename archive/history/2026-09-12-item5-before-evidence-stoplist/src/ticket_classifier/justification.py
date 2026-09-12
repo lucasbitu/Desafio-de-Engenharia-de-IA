@@ -5,19 +5,6 @@ from __future__ import annotations
 from .schemas import ClassificationResult
 
 MAX_JUSTIFICATION_EVIDENCE = 3
-WEAK_EVIDENCE_TERMS = frozenset(
-    {
-        "about", "and", "by", "care", "dear", "el", "for", "hello", "hi", "in",
-        "done", "la", "of", "on", "out", "please", "re", "regards", "related", "se", "si", "thank",
-        "thanks", "the", "to", "user", "va", "which", "with",
-    }
-)
-
-
-def is_informative_evidence(feature: str) -> bool:
-    """Return whether a model feature is useful in a human-facing explanation."""
-
-    return feature.casefold().strip() not in WEAK_EVIDENCE_TERMS
 
 
 def deterministic_justification(
@@ -34,8 +21,6 @@ def deterministic_justification(
 
     features: list[str] = []
     for item in result.evidence:
-        if not is_informative_evidence(item.feature):
-            continue
         if item.feature not in features:
             features.append(item.feature)
         if len(features) == max_evidence:

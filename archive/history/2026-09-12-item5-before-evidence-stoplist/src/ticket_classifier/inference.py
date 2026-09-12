@@ -12,7 +12,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.utils.validation import check_is_fitted
 
-from .justification import is_informative_evidence
 from .schemas import ClassificationResult, Evidence, TicketInput
 
 
@@ -101,12 +100,9 @@ class TicketClassifier:
             contribution = float(contributions[position])
             if contribution <= 0.0:
                 continue
-            feature = str(feature_names[int(present_indices[position])])
-            if not is_informative_evidence(feature):
-                continue
             evidence.append(
                 Evidence(
-                    feature=feature,
+                    feature=str(feature_names[int(present_indices[position])]),
                     tfidf=float(tfidf_values[position]),
                     coefficient=float(coefficients[position]),
                     contribution=contribution,
