@@ -80,15 +80,7 @@ class StreamlitInterfaceTest(unittest.TestCase):
 
     def test_interface_source_has_no_dataset_or_final_test_access(self) -> None:
         source = APP_PATH.read_text(encoding="utf-8").casefold()
-        forbidden = (
-            "test.csv",
-            "read_csv",
-            "data_split",
-            "default_test",
-            "llm_justification",
-            "llm_provider",
-            "api_key",
-        )
+        forbidden = ("test.csv", "read_csv", "data_split", "default_test")
         for term in forbidden:
             self.assertNotIn(term, source)
 

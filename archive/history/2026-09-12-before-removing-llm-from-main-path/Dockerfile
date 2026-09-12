@@ -10,7 +10,7 @@ WORKDIR /app
 COPY pyproject.toml README.md ./
 COPY src ./src
 RUN python -m pip install --upgrade pip \
-    && python -m pip install ".[interface]"
+    && python -m pip install ".[delivery]"
 
 COPY data_split/outputs/train.csv data_split/outputs/train.csv
 COPY data_split/outputs/validation.csv data_split/outputs/validation.csv

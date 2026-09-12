@@ -37,12 +37,16 @@ Ticket
   -> classe e confiança estimada
   -> contribuições locais positivas
   -> política de baixa confiança
-  -> justificativa determinística baseada nas evidências
+  -> justificativa determinística de segurança
+  -> reescrita opcional por LLM
+       -> válida: linguagem natural apoiada nas evidências
+       -> erro ou saída inválida: fallback determinístico
   -> JSON {"class": "...", "justification": "..."}
 ```
 
-O caminho oficial é inteiramente local e determinístico. A interface não carrega SDKs,
-credenciais ou adaptadores de LLM.
+O classificador é a única autoridade sobre a classe. O LLM é uma camada opcional de
+apresentação: não pode mudar previsão, confiança ou evidências, e a aplicação continua
+funcional sem credenciais ou disponibilidade do provedor.
 
 ## Modelo selecionado
 
@@ -80,9 +84,9 @@ um fluxo simples, reproduzível e explicável por contribuições locais das fea
   capturam menos contexto de frases completas.
 - Pesos moderados melhoraram o equilíbrio entre classes minoritárias e frequentes, aceitando
   pequenas perdas pontuais em algumas classes para obter o melhor macro-F1 agregado.
-- Justificativas determinísticas são fiéis ao classificador, rápidas e independentes de
-  serviços externos, mas podem soar menos naturais. Um experimento manual com Gemini não
-  mostrou ganho perceptível e, por isso, não integra o caminho oficial.
+- Justificativas determinísticas são fiéis ao classificador e não dependem de serviços
+  externos, mas podem soar menos naturais e destacar termos pouco informativos em entradas
+  ruidosas. A reescrita por LLM é opcional e sempre preserva o fallback determinístico.
 - A probabilidade da Logistic Regression é útil para triagem de baixa confiança, mas não foi
   formalmente calibrada e não deve ser interpretada como garantia de acerto.
 
@@ -117,11 +121,10 @@ Para instalar também a interface:
 .venv\Scripts\python -m pip install -e ".[interface]"
 ```
 
-Os SDKs de LLM não fazem parte de `requirements.txt` nem da aplicação oficial. Para reproduzir
-somente o protótipo histórico descrito em `docs/experiments/llm-justification.md`:
+Para instalar interface e reescrita generativa opcional:
 
 ```powershell
-.venv\Scripts\python -m pip install -e ".[llm]"
+.venv\Scripts\python -m pip install -e ".[delivery]"
 ```
 
 ## Dados congelados
@@ -187,11 +190,29 @@ A interface reutiliza `DeliveryPredictionService`, exibe a classe e a justificat
 contrato público exigido e oferece diagnósticos de confiança opcionais. Ela não carrega
 datasets, não calcula métricas e não conhece o caminho do teste final.
 
-A interface usa exclusivamente a justificativa determinística. O protótipo de reescrita por
-LLM foi retirado do caminho principal após teste manual não demonstrar ganho de qualidade e
-registrar falhas de disponibilidade. Consulte
-[`docs/experiments/llm-justification.md`](docs/experiments/llm-justification.md) para o histórico,
-as limitações e as condições necessárias para uma futura reavaliação.
+Por padrão, a justificativa permanece determinística. Para ativar somente a reescrita:
+
+```powershell
+$env:ENABLE_LLM_JUSTIFICATION="true"
+$env:LLM_PROVIDER="gemini"
+$env:GEMINI_API_KEY="sua-chave"
+$env:GEMINI_MODEL="gemini-2.5-flash-lite"
+.venv\Scripts\streamlit run app.py
+```
+
+`gemini` é o provedor padrão por oferecer uma camada gratuita para o modelo configurado.
+Também é possível definir `LLM_PROVIDER=openai`, `OPENAI_API_KEY` e `OPENAI_MODEL`. No caso
+da OpenAI, a chamada usa a Responses API com `store=false`.
+
+Independentemente do provedor, o LLM recebe apenas classe, confiança, indicador de baixa
+confiança, evidências permitidas e o fallback. Saída sem a classe, sem evidência permitida,
+longa demais ou sem alerta obrigatório é rejeitada e substituída automaticamente pela
+justificativa determinística.
+
+> Atenção: os termos vigentes do Gemini gratuito permitem que conteúdo enviado e respostas
+> sejam usados para melhorar produtos Google e possam passar por revisão humana. Não envie
+> tickets sensíveis, confidenciais ou com dados pessoais nessa modalidade. Para produção,
+> utilize um serviço com garantias de privacidade adequadas.
 
 ## Docker
 
@@ -202,8 +223,11 @@ inicia o Streamlit na porta 8501:
 docker compose up --build
 ```
 
-A aplicação ficará disponível em `http://localhost:8501`. O contêiner oficial não instala
-SDKs de LLM e não recebe chaves de API.
+A aplicação ficará disponível em `http://localhost:8501`. Para ativar o LLM no Compose,
+defina `ENABLE_LLM_JUSTIFICATION=true`, `LLM_PROVIDER=gemini` e `GEMINI_API_KEY` no ambiente
+antes do comando. `GEMINI_MODEL` é opcional. As mesmas variáveis `OPENAI_*` continuam
+disponíveis quando `LLM_PROVIDER=openai`. Nenhuma chave é copiada para a imagem; elas são
+passadas somente em tempo de execução.
 
 Para validar um build sem reaproveitar camadas anteriores:
 
@@ -286,7 +310,7 @@ nesta execução não podem retroalimentar modelo, features, pesos, limiar ou ju
 - [ADR-006](docs/decisions/ADR-006-clean-environment-reproduction.md): reprodução em ambiente limpo.
 - [ADR-007](docs/decisions/ADR-007-isolated-final-evaluator.md): executor final isolado.
 - [ADR-008](docs/decisions/ADR-008-release-candidate-audit.md): auditoria do candidato de entrega.
-- [ADR-009](docs/decisions/ADR-009-optional-llm-rewriting.md): decisão histórica do protótipo de reescrita; atualmente fora do caminho oficial.
+- [ADR-009](docs/decisions/ADR-009-optional-llm-rewriting.md): reescrita generativa opcional sem grafo.
 
 ## Limitações conhecidas
 

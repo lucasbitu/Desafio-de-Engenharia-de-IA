@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import streamlit as st
@@ -9,6 +10,7 @@ from pydantic import ValidationError
 
 from ticket_classifier.config import DEFAULT_DEVELOPMENT_MODEL_PATH
 from ticket_classifier.delivery import DeliveryPredictionService
+from ticket_classifier.llm_justification import rewriter_from_environment
 
 
 MODEL_PATH = DEFAULT_DEVELOPMENT_MODEL_PATH
@@ -16,8 +18,17 @@ MODEL_PATH = DEFAULT_DEVELOPMENT_MODEL_PATH
 
 @st.cache_resource(show_spinner="Loading the classification model...")
 def load_service(model_path: Path) -> DeliveryPredictionService:
-    """Load the deterministic production model once."""
-    return DeliveryPredictionService.from_model_path(model_path)
+    """Load the model once; all prediction behavior remains in the backend."""
+    rewriter = None
+    if os.environ.get("ENABLE_LLM_JUSTIFICATION", "").casefold() in {"1", "true", "yes"}:
+        try:
+            rewriter = rewriter_from_environment()
+        except Exception:
+            rewriter = None
+    return DeliveryPredictionService.from_model_path(
+        model_path,
+        justification_rewriter=rewriter,
+    )
 
 
 def main() -> None:

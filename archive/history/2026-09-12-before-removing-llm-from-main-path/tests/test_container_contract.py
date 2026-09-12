@@ -19,16 +19,14 @@ class ContainerContractTest(unittest.TestCase):
         self.assertNotIn("test.csv", dockerfile)
         self.assertNotIn("ticket-final-evaluate", dockerfile)
 
-    def test_production_container_has_no_llm_integration(self) -> None:
+    def test_compose_passes_api_key_only_at_runtime(self) -> None:
         compose = (PROJECT_ROOT / "compose.yaml").read_text(encoding="utf-8")
         dockerfile = (PROJECT_ROOT / "Dockerfile").read_text(encoding="utf-8")
-        app = (PROJECT_ROOT / "app.py").read_text(encoding="utf-8")
-        for source in (compose, dockerfile, app):
-            self.assertNotIn("OPENAI_API_KEY", source)
-            self.assertNotIn("GEMINI_API_KEY", source)
-            self.assertNotIn("LLM_PROVIDER", source)
-        self.assertIn(".[interface]", dockerfile)
-        self.assertNotIn(".[delivery]", dockerfile)
+        self.assertIn("OPENAI_API_KEY: ${OPENAI_API_KEY:-}", compose)
+        self.assertIn("GEMINI_API_KEY: ${GEMINI_API_KEY:-}", compose)
+        self.assertIn("LLM_PROVIDER: ${LLM_PROVIDER:-gemini}", compose)
+        self.assertNotIn("OPENAI_API_KEY", dockerfile)
+        self.assertNotIn("GEMINI_API_KEY", dockerfile)
 
     def test_dockerfile_sets_explicit_project_root(self) -> None:
         dockerfile = (PROJECT_ROOT / "Dockerfile").read_text(encoding="utf-8")

@@ -24,6 +24,11 @@ llm = [
   "google-genai==1.55.0",
   "openai==2.54.0",
 ]
+delivery = [
+  "google-genai==1.55.0",
+  "streamlit==1.49.1",
+  "openai==2.54.0",
+]
 
 [project.scripts]
 ticket-train = "ticket_classifier.training:main"
