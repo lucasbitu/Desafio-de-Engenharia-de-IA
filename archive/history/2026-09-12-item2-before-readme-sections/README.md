@@ -70,26 +70,6 @@ No teste final congelado de 200 tickets, após treinamento em treino mais valida
 accuracy 0,9050, macro-F1 0,9135 e weighted-F1 0,9061. Consulte o
 [relatório final](docs/final-evaluation-report.md).
 
-## Por que esta abordagem
-
-O dataset já oferece dezenas de milhares de tickets rotulados em oito classes fixas. Por
-isso, TF-IDF com Logistic Regression aproveita diretamente a supervisão disponível, treina
-rápido e funciona localmente, sem custo, latência ou dependência de uma API de LLM. O E04
-foi escolhido por apresentar o melhor macro-F1 de validação entre os experimentos, mantendo
-um fluxo simples, reproduzível e explicável por contribuições locais das features.
-
-## Principais trade-offs
-
-- Unigramas produziram métricas melhores e um vocabulário muito menor que bigramas, mas
-  capturam menos contexto de frases completas.
-- Pesos moderados melhoraram o equilíbrio entre classes minoritárias e frequentes, aceitando
-  pequenas perdas pontuais em algumas classes para obter o melhor macro-F1 agregado.
-- Justificativas determinísticas são fiéis ao classificador e não dependem de serviços
-  externos, mas podem soar menos naturais e destacar termos pouco informativos em entradas
-  ruidosas. A reescrita por LLM é opcional e sempre preserva o fallback determinístico.
-- A probabilidade da Logistic Regression é útil para triagem de baixa confiança, mas não foi
-  formalmente calibrada e não deve ser interpretada como garantia de acerto.
-
 ## Baixa confiança
 
 Uma previsão é sinalizada quando:
@@ -245,38 +225,9 @@ instalado em `site-packages`.
 ## Reprodução em ambiente limpo
 
 O candidato de entrega foi auditado em uma cópia local limpa com um ambiente virtual novo.
-A instalação declarada, o treinamento de desenvolvimento, o `pip check`, os 53 testes e o
+A instalação declarada, o treinamento de desenvolvimento, o `pip check`, os 43 testes e o
 smoke test do Streamlit foram aprovados. Accuracy, macro-F1, weighted-F1, vocabulário,
 classes e pesos foram reproduzidos exatamente.
-
-Em 12 de setembro de 2026, os dois caminhos foram novamente reproduzidos. O Docker foi
-validado a partir de um clone limpo do `origin/main` com:
-
-```powershell
-docker compose build --no-cache
-docker compose up -d
-docker compose ps
-Invoke-WebRequest -UseBasicParsing http://localhost:8501/_stcore/health
-```
-
-O plano B foi validado em um venv temporário independente, usando nomes alternativos para
-não tocar no ambiente e nos artefatos oficiais já existentes:
-
-```powershell
-py -3 -m venv .venv-part1-validation
-.venv-part1-validation\Scripts\python -m pip install --upgrade pip
-.venv-part1-validation\Scripts\python -m pip install -r requirements.txt
-.venv-part1-validation\Scripts\python -m pip install --no-deps -e .
-.venv-part1-validation\Scripts\python -m pip check
-.venv-part1-validation\Scripts\ticket-train --output-dir tmp\part1-venv-artifacts
-.venv-part1-validation\Scripts\python -m unittest discover -s tests -v
-.venv-part1-validation\Scripts\streamlit run app.py --server.address=127.0.0.1 --server.port=8502 --server.headless=true --browser.gatherUsageStats=false
-Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8502/_stcore/health
-```
-
-Ambos responderam HTTP 200 com corpo `ok`. O Docker e o venv reproduziram accuracy
-`0,8571578505457599`, macro-F1 `0,8617016202371395` e weighted-F1
-`0,8576483790122832` na validação de desenvolvimento.
 
 O arquivo `joblib` reproduzido não teve identidade binária com o artefato anterior, apesar
 de parâmetros, previsões, probabilidades e métricas equivalentes. Por isso, cada artefato de
@@ -291,7 +242,7 @@ desenvolvimento:
 .venv\Scripts\ticket-final-evaluate --confirm I_UNDERSTAND_THIS_OPENS_THE_FINAL_TEST
 ```
 
-Antes de executá-lo, deve existir um release candidate identificado, com Git limpo, 53 testes
+Antes de executá-lo, deve existir um release candidate identificado, com Git limpo, 43 testes
 aprovados e autorização explícita para abrir os 200 tickets. O executor valida hashes,
 contagens, classes e ausência de sobreposição; treina o E04 em treino mais validação; recalcula
 os pesos moderados; e grava modelo, métricas, previsões, matriz de confusão e metadados em
@@ -320,15 +271,6 @@ nesta execução não podem retroalimentar modelo, features, pesos, limiar ou ju
 - as probabilidades não possuem calibração formal;
 - baixa confiança representa incerteza, não erro;
 - algumas classes compartilham vocabulário e continuam ambíguas.
-
-## Com mais tempo
-
-- auditar quase duplicatas semânticas antes da divisão e medir possível vazamento entre
-  treino, validação e teste;
-- realizar avaliação humana das justificativas e melhorar a seleção de evidências fracas;
-- calibrar as probabilidades em uma partição dedicada e validar o limiar de revisão humana;
-- comparar o baseline com embeddings semânticos e ensembles usando um novo conjunto de teste;
-- adicionar API, observabilidade e monitoramento de drift para uma implantação de produção.
 
 ## Estado de entrega
 

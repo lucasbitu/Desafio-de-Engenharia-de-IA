@@ -245,38 +245,9 @@ instalado em `site-packages`.
 ## Reprodução em ambiente limpo
 
 O candidato de entrega foi auditado em uma cópia local limpa com um ambiente virtual novo.
-A instalação declarada, o treinamento de desenvolvimento, o `pip check`, os 53 testes e o
+A instalação declarada, o treinamento de desenvolvimento, o `pip check`, os 43 testes e o
 smoke test do Streamlit foram aprovados. Accuracy, macro-F1, weighted-F1, vocabulário,
 classes e pesos foram reproduzidos exatamente.
-
-Em 12 de setembro de 2026, os dois caminhos foram novamente reproduzidos. O Docker foi
-validado a partir de um clone limpo do `origin/main` com:
-
-```powershell
-docker compose build --no-cache
-docker compose up -d
-docker compose ps
-Invoke-WebRequest -UseBasicParsing http://localhost:8501/_stcore/health
-```
-
-O plano B foi validado em um venv temporário independente, usando nomes alternativos para
-não tocar no ambiente e nos artefatos oficiais já existentes:
-
-```powershell
-py -3 -m venv .venv-part1-validation
-.venv-part1-validation\Scripts\python -m pip install --upgrade pip
-.venv-part1-validation\Scripts\python -m pip install -r requirements.txt
-.venv-part1-validation\Scripts\python -m pip install --no-deps -e .
-.venv-part1-validation\Scripts\python -m pip check
-.venv-part1-validation\Scripts\ticket-train --output-dir tmp\part1-venv-artifacts
-.venv-part1-validation\Scripts\python -m unittest discover -s tests -v
-.venv-part1-validation\Scripts\streamlit run app.py --server.address=127.0.0.1 --server.port=8502 --server.headless=true --browser.gatherUsageStats=false
-Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8502/_stcore/health
-```
-
-Ambos responderam HTTP 200 com corpo `ok`. O Docker e o venv reproduziram accuracy
-`0,8571578505457599`, macro-F1 `0,8617016202371395` e weighted-F1
-`0,8576483790122832` na validação de desenvolvimento.
 
 O arquivo `joblib` reproduzido não teve identidade binária com o artefato anterior, apesar
 de parâmetros, previsões, probabilidades e métricas equivalentes. Por isso, cada artefato de
@@ -291,7 +262,7 @@ desenvolvimento:
 .venv\Scripts\ticket-final-evaluate --confirm I_UNDERSTAND_THIS_OPENS_THE_FINAL_TEST
 ```
 
-Antes de executá-lo, deve existir um release candidate identificado, com Git limpo, 53 testes
+Antes de executá-lo, deve existir um release candidate identificado, com Git limpo, 43 testes
 aprovados e autorização explícita para abrir os 200 tickets. O executor valida hashes,
 contagens, classes e ausência de sobreposição; treina o E04 em treino mais validação; recalcula
 os pesos moderados; e grava modelo, métricas, previsões, matriz de confusão e metadados em
