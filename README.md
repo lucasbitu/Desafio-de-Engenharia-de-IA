@@ -16,11 +16,12 @@ Concluído:
 - justificativa determinística;
 - política de baixa confiança selecionada somente na validação;
 - treinamento oficial da fase de desenvolvimento;
-- testes automatizados do núcleo.
+- testes automatizados do núcleo;
+- interface interativa Streamlit;
+- reprodução aprovada em ambiente virtual limpo.
 
 Ainda não implementado:
 
-- interface interativa;
 - treinamento final em treino mais validação;
 - avaliação única dos 200 tickets finais;
 - relatório final de teste.
@@ -83,6 +84,12 @@ py -3 -m venv .venv
 
 As versões das dependências estão fixadas em `pyproject.toml`.
 
+Para instalar também a interface:
+
+```powershell
+.venv\Scripts\python -m pip install -e ".[interface]"
+```
+
 ## Dados congelados
 
 O treinamento de desenvolvimento espera:
@@ -130,11 +137,41 @@ $env:PYTHONPATH="$PWD\src"
 py -3 -m unittest discover -s tests -v
 ```
 
+Os testes pressupõem que `ticket-train` tenha gerado os artefatos oficiais em
+`artifacts/development/`. Eles não dependem dos binários históricos ignorados em
+`modeling/experiments/`.
+
+## Interface interativa
+
+Depois de executar `ticket-train`:
+
+```powershell
+.venv\Scripts\streamlit run app.py
+```
+
+A interface reutiliza `DeliveryPredictionService`, exibe a classe e a justificativa no
+contrato público exigido e oferece diagnósticos de confiança opcionais. Ela não carrega
+datasets, não calcula métricas e não conhece o caminho do teste final.
+
+## Reprodução em ambiente limpo
+
+O commit de preparação do release foi validado em uma cópia local limpa com um ambiente
+virtual novo. A instalação declarada, o treinamento de desenvolvimento, o `pip check`, os
+38 testes e o smoke test do Streamlit foram aprovados. Accuracy, macro-F1, weighted-F1,
+vocabulário, classes e pesos foram reproduzidos exatamente.
+
+O arquivo `joblib` reproduzido não teve identidade binária com o artefato anterior, apesar
+de parâmetros, previsões, probabilidades e métricas equivalentes. Por isso, cada artefato de
+release recebe seu próprio hash; equivalência funcional é validada separadamente.
+
 ## Decisões arquiteturais
 
 - [ADR-001](docs/decisions/ADR-001-classification-methodology.md): metodologia inicial.
 - [ADR-002](docs/decisions/ADR-002-final-model-selection.md): seleção e congelamento do E04; substitui as escolhas iniciais de bigramas e balanceamento integral.
 - [ADR-003](docs/decisions/ADR-003-low-confidence-policy.md): limiar de baixa confiança.
+- [ADR-004](docs/decisions/ADR-004-development-baseline-and-release-gates.md): baseline e gates de release.
+- [ADR-005](docs/decisions/ADR-005-thin-streamlit-interface.md): interface Streamlit fina.
+- [ADR-006](docs/decisions/ADR-006-clean-environment-reproduction.md): reprodução em ambiente limpo.
 
 ## Limitações conhecidas
 
@@ -147,4 +184,5 @@ py -3 -m unittest discover -s tests -v
 
 ## Próxima etapa
 
-Depois de reproduzir o treinamento e executar todos os testes em ambiente limpo, o próximo bloco será a interface interativa. O teste final continuará fechado até o congelamento completo do release candidate.
+Projetar e testar o executor final isolado sem executá-lo contra os 200 tickets. O teste final
+continuará fechado até o congelamento completo do release candidate.

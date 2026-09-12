@@ -21,19 +21,19 @@ from .confidence import LOW_CONFIDENCE_THRESHOLD, evaluate_threshold, is_low_con
 from .config import (
     DEFAULT_TRAIN_PATH,
     DEFAULT_VALIDATION_PATH,
+    DEFAULT_DEVELOPMENT_ARTIFACT_DIR,
     EXPECTED_TRAIN_ROWS,
     EXPECTED_TRAIN_SHA256,
     EXPECTED_VALIDATION_ROWS,
     EXPECTED_VALIDATION_SHA256,
     ID_COLUMN,
     LABEL_COLUMN,
-    PROJECT_ROOT,
     RANDOM_SEED,
     TEXT_COLUMN,
 )
 from .model import build_e04_pipeline
 
-DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "artifacts" / "development"
+DEFAULT_OUTPUT_DIR = DEFAULT_DEVELOPMENT_ARTIFACT_DIR
 OUTPUT_FILES = (
     "model.joblib",
     "validation_metrics.json",

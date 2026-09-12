@@ -7,11 +7,11 @@ from pathlib import Path
 import streamlit as st
 from pydantic import ValidationError
 
-from ticket_classifier.config import PROJECT_ROOT
+from ticket_classifier.config import DEFAULT_DEVELOPMENT_MODEL_PATH
 from ticket_classifier.delivery import DeliveryPredictionService
 
 
-MODEL_PATH = PROJECT_ROOT / "artifacts" / "development" / "model.joblib"
+MODEL_PATH = DEFAULT_DEVELOPMENT_MODEL_PATH
 
 
 @st.cache_resource(show_spinner="Loading the classification model...")

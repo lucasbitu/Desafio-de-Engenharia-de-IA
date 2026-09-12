@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 from pydantic import ValidationError
 
-from ticket_classifier.config import LEGACY_E04_MODEL_PATH
+from ticket_classifier.config import DEFAULT_DEVELOPMENT_MODEL_PATH
 from ticket_classifier.inference import TicketClassifier
 from ticket_classifier.schemas import PredictionOutput, TicketInput
 
@@ -15,7 +15,7 @@ from ticket_classifier.schemas import PredictionOutput, TicketInput
 class InferenceContractTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.service = TicketClassifier.from_path(LEGACY_E04_MODEL_PATH)
+        cls.service = TicketClassifier.from_path(DEFAULT_DEVELOPMENT_MODEL_PATH)
 
     def test_input_normalizes_whitespace(self) -> None:
         request = TicketInput(text="  reset\n\tpassword   for account  ")
@@ -71,9 +71,9 @@ class InferenceContractTest(unittest.TestCase):
 
     def test_top_k_bounds_are_validated(self) -> None:
         with self.assertRaises(ValueError):
-            TicketClassifier.from_path(LEGACY_E04_MODEL_PATH, top_k_evidence=0)
+            TicketClassifier.from_path(DEFAULT_DEVELOPMENT_MODEL_PATH, top_k_evidence=0)
         with self.assertRaises(ValueError):
-            TicketClassifier.from_path(LEGACY_E04_MODEL_PATH, top_k_evidence=11)
+            TicketClassifier.from_path(DEFAULT_DEVELOPMENT_MODEL_PATH, top_k_evidence=11)
 
     def test_final_public_contract_has_exact_required_shape(self) -> None:
         output = PredictionOutput(

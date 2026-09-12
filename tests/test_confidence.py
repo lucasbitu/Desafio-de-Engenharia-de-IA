@@ -12,24 +12,20 @@ from ticket_classifier.confidence import (
     is_low_confidence,
     select_lowest_eligible_threshold,
 )
-from ticket_classifier.config import LEGACY_E04_MODEL_PATH, PROJECT_ROOT
+from ticket_classifier.config import (
+    DEFAULT_DEVELOPMENT_MODEL_PATH,
+    DEFAULT_DEVELOPMENT_PREDICTIONS_PATH,
+)
 from ticket_classifier.delivery import DeliveryPredictionService
 
-VALIDATION_PREDICTIONS = (
-    PROJECT_ROOT
-    / "modeling"
-    / "experiments"
-    / "e04_moderate_weights"
-    / "outputs"
-    / "validation_predictions.csv"
-)
+VALIDATION_PREDICTIONS = DEFAULT_DEVELOPMENT_PREDICTIONS_PATH
 
 
 class ConfidencePolicyTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.predictions = pd.read_csv(VALIDATION_PREDICTIONS, encoding="utf-8")
-        cls.service = DeliveryPredictionService.from_model_path(LEGACY_E04_MODEL_PATH)
+        cls.service = DeliveryPredictionService.from_model_path(DEFAULT_DEVELOPMENT_MODEL_PATH)
 
     def test_frozen_boundary_is_strictly_below_point_six(self) -> None:
         self.assertTrue(is_low_confidence(0.59))

@@ -9,12 +9,12 @@ from unittest.mock import patch
 
 from streamlit.testing.v1 import AppTest
 
-from ticket_classifier.config import PROJECT_ROOT
+from ticket_classifier.config import DEFAULT_DEVELOPMENT_MODEL_PATH, PROJECT_ROOT
 from ticket_classifier.delivery import DeliveryPredictionService
 
 
 APP_PATH = PROJECT_ROOT / "app.py"
-MODEL_PATH = PROJECT_ROOT / "artifacts" / "development" / "model.joblib"
+MODEL_PATH = DEFAULT_DEVELOPMENT_MODEL_PATH
 
 
 class StreamlitInterfaceTest(unittest.TestCase):

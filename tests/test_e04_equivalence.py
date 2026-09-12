@@ -22,7 +22,7 @@ from ticket_classifier.config import (
     EXPECTED_VALIDATION_ROWS,
     EXPECTED_VALIDATION_SHA256,
     LABEL_COLUMN,
-    LEGACY_E04_MODEL_PATH,
+    DEFAULT_DEVELOPMENT_MODEL_PATH,
     TEXT_COLUMN,
 )
 from ticket_classifier.model import build_e04_pipeline, moderate_class_weights
@@ -51,7 +51,7 @@ class E04EquivalenceTest(unittest.TestCase):
         if len(cls.validation) != EXPECTED_VALIDATION_ROWS:
             raise AssertionError("The frozen validation split has an unexpected row count.")
 
-        cls.legacy = joblib.load(LEGACY_E04_MODEL_PATH)
+        cls.legacy = joblib.load(DEFAULT_DEVELOPMENT_MODEL_PATH)
         cls.canonical = build_e04_pipeline(cls.train[LABEL_COLUMN])
         cls.canonical.fit(cls.train[TEXT_COLUMN], cls.train[LABEL_COLUMN])
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 import unittest
 
-from ticket_classifier.config import LEGACY_E04_MODEL_PATH
+from ticket_classifier.config import DEFAULT_DEVELOPMENT_MODEL_PATH
 from ticket_classifier.justification import deterministic_justification
 from ticket_classifier.prediction import TicketPredictionService
 from ticket_classifier.schemas import ClassificationResult
@@ -14,7 +14,7 @@ from ticket_classifier.schemas import ClassificationResult
 class DeterministicJustificationTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.service = TicketPredictionService.from_model_path(LEGACY_E04_MODEL_PATH)
+        cls.service = TicketPredictionService.from_model_path(DEFAULT_DEVELOPMENT_MODEL_PATH)
 
     def test_public_prediction_has_exact_required_shape(self) -> None:
         output = self.service.predict("reset password for account access")
